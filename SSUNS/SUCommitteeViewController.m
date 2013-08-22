@@ -60,9 +60,10 @@
     SUSpinnerView* spinner = [SUSpinnerView loadSpinnerIntoView:self.view];
 
     [SUWebParser loadCommitteesListWithResponse:^(NSDictionary *responseBlock) {
+        [spinner removeFromSuperview];
+
         communityList = responseBlock;
         [self.tableView reloadData];
-        [spinner removeFromSuperview];
     } andError:^(NSString *errorBlock) {
         
     }];
