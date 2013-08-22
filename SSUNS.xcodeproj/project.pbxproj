@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A60CFEC17C573AD00161EC0 /* SUScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60CFEB17C573AD00161EC0 /* SUScheduleViewController.m */; };
+		1A60CFEF17C5740300161EC0 /* SUCommitteeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60CFEE17C5740300161EC0 /* SUCommitteeViewController.m */; };
+		1A60CFF217C5770200161EC0 /* UIBarButtonItem+LNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60CFF117C5770200161EC0 /* UIBarButtonItem+LNAdditions.m */; };
+		1A60CFF517C577C900161EC0 /* UIBlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60CFF417C577C900161EC0 /* UIBlockButton.m */; };
+		1A60CFFB17C57BF500161EC0 /* 09-chat-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A60CFF717C57BF500161EC0 /* 09-chat-2.png */; };
+		1A60CFFC17C57BF500161EC0 /* 13-target.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A60CFF817C57BF500161EC0 /* 13-target.png */; };
+		1A60CFFD17C57BF500161EC0 /* 18-envelope.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A60CFF917C57BF500161EC0 /* 18-envelope.png */; };
+		1A60CFFE17C57BF500161EC0 /* 103-map.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A60CFFA17C57BF500161EC0 /* 103-map.png */; };
+		1A60D00117C57D2D00161EC0 /* SUMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60D00017C57D2D00161EC0 /* SUMenuView.m */; };
+		1A60D00317C5800E00161EC0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A60D00217C5800D00161EC0 /* MessageUI.framework */; };
+		1A60D00617C5868F00161EC0 /* SUWebParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60D00517C5868F00161EC0 /* SUWebParser.m */; };
+		1A60D00E17C598BA00161EC0 /* SUCommDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60D00D17C598BA00161EC0 /* SUCommDetailViewController.m */; };
+		1A60D01117C5AB7D00161EC0 /* SUWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60D01017C5AB7D00161EC0 /* SUWebViewController.m */; };
+		1A60D01417C5C99F00161EC0 /* SUwebview.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60D01317C5C99E00161EC0 /* SUwebview.m */; };
+		1A60D01717C5D3C200161EC0 /* SUSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60D01617C5D3C200161EC0 /* SUSpinnerView.m */; };
+		1A60D01D17C5DE9000161EC0 /* SUAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A60D01C17C5DE8F00161EC0 /* SUAboutViewController.m */; };
+		1A6BFDC3178B63CC007FBBAD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A6BFDC2178B63CC007FBBAD /* Crashlytics.framework */; };
 		1AFEB42B177A5F8500DCF32E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AFEB42A177A5F8500DCF32E /* UIKit.framework */; };
 		1AFEB42D177A5F8500DCF32E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AFEB42C177A5F8500DCF32E /* Foundation.framework */; };
 		1AFEB42F177A5F8500DCF32E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AFEB42E177A5F8500DCF32E /* CoreGraphics.framework */; };
@@ -16,9 +33,41 @@
 		1AFEB43D177A5F8500DCF32E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFEB43C177A5F8500DCF32E /* Default.png */; };
 		1AFEB43F177A5F8500DCF32E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFEB43E177A5F8500DCF32E /* Default@2x.png */; };
 		1AFEB441177A5F8500DCF32E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFEB440177A5F8500DCF32E /* Default-568h@2x.png */; };
+		1AFEB44C177A688900DCF32E /* SUTwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEB44B177A688900DCF32E /* SUTwitterViewController.m */; };
+		1AFEB44F177A69AF00DCF32E /* SUMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEB44E177A69AF00DCF32E /* SUMapViewController.m */; };
+		1AFEB452177A6E5600DCF32E /* SUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEB451177A6E5600DCF32E /* SUViewController.m */; };
+		F4D9F03C1628440ABF628A72 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F964162B1937498E8537DDA7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A60CFEA17C573AD00161EC0 /* SUScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUScheduleViewController.h; sourceTree = "<group>"; };
+		1A60CFEB17C573AD00161EC0 /* SUScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUScheduleViewController.m; sourceTree = "<group>"; };
+		1A60CFED17C5740300161EC0 /* SUCommitteeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUCommitteeViewController.h; sourceTree = "<group>"; };
+		1A60CFEE17C5740300161EC0 /* SUCommitteeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUCommitteeViewController.m; sourceTree = "<group>"; };
+		1A60CFF017C5770200161EC0 /* UIBarButtonItem+LNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+LNAdditions.h"; sourceTree = "<group>"; };
+		1A60CFF117C5770200161EC0 /* UIBarButtonItem+LNAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+LNAdditions.m"; sourceTree = "<group>"; };
+		1A60CFF317C577C900161EC0 /* UIBlockButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBlockButton.h; sourceTree = "<group>"; };
+		1A60CFF417C577C900161EC0 /* UIBlockButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBlockButton.m; sourceTree = "<group>"; };
+		1A60CFF717C57BF500161EC0 /* 09-chat-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "09-chat-2.png"; path = "images/09-chat-2.png"; sourceTree = "<group>"; };
+		1A60CFF817C57BF500161EC0 /* 13-target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "13-target.png"; path = "images/13-target.png"; sourceTree = "<group>"; };
+		1A60CFF917C57BF500161EC0 /* 18-envelope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "18-envelope.png"; path = "images/18-envelope.png"; sourceTree = "<group>"; };
+		1A60CFFA17C57BF500161EC0 /* 103-map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "103-map.png"; path = "images/103-map.png"; sourceTree = "<group>"; };
+		1A60CFFF17C57D2D00161EC0 /* SUMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUMenuView.h; sourceTree = "<group>"; };
+		1A60D00017C57D2D00161EC0 /* SUMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUMenuView.m; sourceTree = "<group>"; };
+		1A60D00217C5800D00161EC0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		1A60D00417C5868F00161EC0 /* SUWebParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUWebParser.h; sourceTree = "<group>"; };
+		1A60D00517C5868F00161EC0 /* SUWebParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUWebParser.m; sourceTree = "<group>"; };
+		1A60D00C17C598BA00161EC0 /* SUCommDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUCommDetailViewController.h; sourceTree = "<group>"; };
+		1A60D00D17C598BA00161EC0 /* SUCommDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUCommDetailViewController.m; sourceTree = "<group>"; };
+		1A60D00F17C5AB7D00161EC0 /* SUWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUWebViewController.h; sourceTree = "<group>"; };
+		1A60D01017C5AB7D00161EC0 /* SUWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUWebViewController.m; sourceTree = "<group>"; };
+		1A60D01217C5C99E00161EC0 /* SUwebview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUwebview.h; sourceTree = "<group>"; };
+		1A60D01317C5C99E00161EC0 /* SUwebview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUwebview.m; sourceTree = "<group>"; };
+		1A60D01517C5D3C100161EC0 /* SUSpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSpinnerView.h; sourceTree = "<group>"; };
+		1A60D01617C5D3C200161EC0 /* SUSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSpinnerView.m; sourceTree = "<group>"; };
+		1A60D01B17C5DE8E00161EC0 /* SUAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUAboutViewController.h; sourceTree = "<group>"; };
+		1A60D01C17C5DE8F00161EC0 /* SUAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUAboutViewController.m; sourceTree = "<group>"; };
+		1A6BFDC2178B63CC007FBBAD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		1AFEB427177A5F8500DCF32E /* SSUNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSUNS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AFEB42A177A5F8500DCF32E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1AFEB42C177A5F8500DCF32E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -32,6 +81,14 @@
 		1AFEB43C177A5F8500DCF32E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		1AFEB43E177A5F8500DCF32E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		1AFEB440177A5F8500DCF32E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		1AFEB44A177A688900DCF32E /* SUTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUTwitterViewController.h; sourceTree = "<group>"; };
+		1AFEB44B177A688900DCF32E /* SUTwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUTwitterViewController.m; sourceTree = "<group>"; };
+		1AFEB44D177A69AF00DCF32E /* SUMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUMapViewController.h; sourceTree = "<group>"; };
+		1AFEB44E177A69AF00DCF32E /* SUMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUMapViewController.m; sourceTree = "<group>"; };
+		1AFEB450177A6E5600DCF32E /* SUViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUViewController.h; sourceTree = "<group>"; };
+		1AFEB451177A6E5600DCF32E /* SUViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUViewController.m; sourceTree = "<group>"; };
+		866273C966924EBC9F4C5433 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		F964162B1937498E8537DDA7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,21 +96,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A60D00317C5800E00161EC0 /* MessageUI.framework in Frameworks */,
 				1AFEB42B177A5F8500DCF32E /* UIKit.framework in Frameworks */,
 				1AFEB42D177A5F8500DCF32E /* Foundation.framework in Frameworks */,
 				1AFEB42F177A5F8500DCF32E /* CoreGraphics.framework in Frameworks */,
+				F4D9F03C1628440ABF628A72 /* libPods.a in Frameworks */,
+				1A6BFDC3178B63CC007FBBAD /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A60CFF617C57B6800161EC0 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				1A60CFF717C57BF500161EC0 /* 09-chat-2.png */,
+				1A60CFF817C57BF500161EC0 /* 13-target.png */,
+				1A60CFF917C57BF500161EC0 /* 18-envelope.png */,
+				1A60CFFA17C57BF500161EC0 /* 103-map.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		1AFEB41E177A5F8500DCF32E = {
 			isa = PBXGroup;
 			children = (
 				1AFEB430177A5F8500DCF32E /* SSUNS */,
 				1AFEB429177A5F8500DCF32E /* Frameworks */,
 				1AFEB428177A5F8500DCF32E /* Products */,
+				866273C966924EBC9F4C5433 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,9 +140,12 @@
 		1AFEB429177A5F8500DCF32E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A60D00217C5800D00161EC0 /* MessageUI.framework */,
+				1A6BFDC2178B63CC007FBBAD /* Crashlytics.framework */,
 				1AFEB42A177A5F8500DCF32E /* UIKit.framework */,
 				1AFEB42C177A5F8500DCF32E /* Foundation.framework */,
 				1AFEB42E177A5F8500DCF32E /* CoreGraphics.framework */,
+				F964162B1937498E8537DDA7 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -78,9 +153,38 @@
 		1AFEB430177A5F8500DCF32E /* SSUNS */ = {
 			isa = PBXGroup;
 			children = (
+				1A60CFF617C57B6800161EC0 /* images */,
 				1AFEB439177A5F8500DCF32E /* SUAppDelegate.h */,
 				1AFEB43A177A5F8500DCF32E /* SUAppDelegate.m */,
 				1AFEB431177A5F8500DCF32E /* Supporting Files */,
+				1AFEB44A177A688900DCF32E /* SUTwitterViewController.h */,
+				1AFEB44B177A688900DCF32E /* SUTwitterViewController.m */,
+				1AFEB44D177A69AF00DCF32E /* SUMapViewController.h */,
+				1AFEB44E177A69AF00DCF32E /* SUMapViewController.m */,
+				1AFEB450177A6E5600DCF32E /* SUViewController.h */,
+				1AFEB451177A6E5600DCF32E /* SUViewController.m */,
+				1A60CFEA17C573AD00161EC0 /* SUScheduleViewController.h */,
+				1A60CFEB17C573AD00161EC0 /* SUScheduleViewController.m */,
+				1A60CFED17C5740300161EC0 /* SUCommitteeViewController.h */,
+				1A60CFEE17C5740300161EC0 /* SUCommitteeViewController.m */,
+				1A60CFF017C5770200161EC0 /* UIBarButtonItem+LNAdditions.h */,
+				1A60CFF117C5770200161EC0 /* UIBarButtonItem+LNAdditions.m */,
+				1A60CFF317C577C900161EC0 /* UIBlockButton.h */,
+				1A60CFF417C577C900161EC0 /* UIBlockButton.m */,
+				1A60CFFF17C57D2D00161EC0 /* SUMenuView.h */,
+				1A60D00017C57D2D00161EC0 /* SUMenuView.m */,
+				1A60D00417C5868F00161EC0 /* SUWebParser.h */,
+				1A60D00517C5868F00161EC0 /* SUWebParser.m */,
+				1A60D00C17C598BA00161EC0 /* SUCommDetailViewController.h */,
+				1A60D00D17C598BA00161EC0 /* SUCommDetailViewController.m */,
+				1A60D00F17C5AB7D00161EC0 /* SUWebViewController.h */,
+				1A60D01017C5AB7D00161EC0 /* SUWebViewController.m */,
+				1A60D01217C5C99E00161EC0 /* SUwebview.h */,
+				1A60D01317C5C99E00161EC0 /* SUwebview.m */,
+				1A60D01517C5D3C100161EC0 /* SUSpinnerView.h */,
+				1A60D01617C5D3C200161EC0 /* SUSpinnerView.m */,
+				1A60D01B17C5DE8E00161EC0 /* SUAboutViewController.h */,
+				1A60D01C17C5DE8F00161EC0 /* SUAboutViewController.m */,
 			);
 			path = SSUNS;
 			sourceTree = "<group>";
@@ -106,9 +210,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1AFEB444177A5F8500DCF32E /* Build configuration list for PBXNativeTarget "SSUNS" */;
 			buildPhases = (
+				219CCE979D544C3898FD3A4F /* Check Pods Manifest.lock */,
 				1AFEB423177A5F8500DCF32E /* Sources */,
 				1AFEB424177A5F8500DCF32E /* Frameworks */,
 				1AFEB425177A5F8500DCF32E /* Resources */,
+				837B392CA20D4FE5BB3D2091 /* Copy Pods Resources */,
+				1A6BFDC1178B63B4007FBBAD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -155,10 +262,58 @@
 				1AFEB43D177A5F8500DCF32E /* Default.png in Resources */,
 				1AFEB43F177A5F8500DCF32E /* Default@2x.png in Resources */,
 				1AFEB441177A5F8500DCF32E /* Default-568h@2x.png in Resources */,
+				1A60CFFB17C57BF500161EC0 /* 09-chat-2.png in Resources */,
+				1A60CFFC17C57BF500161EC0 /* 13-target.png in Resources */,
+				1A60CFFD17C57BF500161EC0 /* 18-envelope.png in Resources */,
+				1A60CFFE17C57BF500161EC0 /* 103-map.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A6BFDC1178B63B4007FBBAD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 6db80046a0ed213ddfcae907e190a1174b821652";
+		};
+		219CCE979D544C3898FD3A4F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sanbox is not in sync with the Podfile.lock. Run 'pod install'.\nEOM\n    exit 1\nfi\n";
+		};
+		837B392CA20D4FE5BB3D2091 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1AFEB423177A5F8500DCF32E /* Sources */ = {
@@ -167,6 +322,20 @@
 			files = (
 				1AFEB437177A5F8500DCF32E /* main.m in Sources */,
 				1AFEB43B177A5F8500DCF32E /* SUAppDelegate.m in Sources */,
+				1AFEB44C177A688900DCF32E /* SUTwitterViewController.m in Sources */,
+				1AFEB44F177A69AF00DCF32E /* SUMapViewController.m in Sources */,
+				1AFEB452177A6E5600DCF32E /* SUViewController.m in Sources */,
+				1A60CFEC17C573AD00161EC0 /* SUScheduleViewController.m in Sources */,
+				1A60CFEF17C5740300161EC0 /* SUCommitteeViewController.m in Sources */,
+				1A60CFF217C5770200161EC0 /* UIBarButtonItem+LNAdditions.m in Sources */,
+				1A60CFF517C577C900161EC0 /* UIBlockButton.m in Sources */,
+				1A60D00117C57D2D00161EC0 /* SUMenuView.m in Sources */,
+				1A60D00617C5868F00161EC0 /* SUWebParser.m in Sources */,
+				1A60D00E17C598BA00161EC0 /* SUCommDetailViewController.m in Sources */,
+				1A60D01117C5AB7D00161EC0 /* SUWebViewController.m in Sources */,
+				1A60D01417C5C99F00161EC0 /* SUwebview.m in Sources */,
+				1A60D01717C5D3C200161EC0 /* SUSpinnerView.m in Sources */,
+				1A60D01D17C5DE9000161EC0 /* SUAboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,10 +411,21 @@
 		};
 		1AFEB445177A5F8500DCF32E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 866273C966924EBC9F4C5433 /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_X86_VECTOR_INSTRUCTIONS = default;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SSUNS/SSUNS-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"${PODS_HEADERS_SEARCH_PATHS}",
+					"$(SRCROOT)/**",
+				);
 				INFOPLIST_FILE = "SSUNS/SSUNS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -253,10 +433,21 @@
 		};
 		1AFEB446177A5F8500DCF32E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 866273C966924EBC9F4C5433 /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_X86_VECTOR_INSTRUCTIONS = default;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SSUNS/SSUNS-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"${PODS_HEADERS_SEARCH_PATHS}",
+					"$(SRCROOT)/**",
+				);
 				INFOPLIST_FILE = "SSUNS/SSUNS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -281,6 +472,7 @@
 				1AFEB446177A5F8500DCF32E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

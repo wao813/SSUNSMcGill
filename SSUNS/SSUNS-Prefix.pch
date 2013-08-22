@@ -1,8 +1,10 @@
 //
 // Prefix header for all source files of the 'SSUNS' target in the 'SSUNS' project
 //
-
-#import <Availability.h>
+#define CELL_CONTENT_WIDTH 300
+#define CELL_CONTENT_MARGIN 10
+#define FONT_SIZE 18
+typedef void (^ActionBlock)();
 
 #ifndef __IPHONE_3_0
 #warning "This project uses features only available in iOS SDK 3.0 and later."
@@ -11,4 +13,9 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "UIBarButtonItem+LNAdditions.h"
+    #import "SUViewController.h"
 #endif
+
+typedef void (^SUBlockResponse)(NSDictionary* responseBlock);
+typedef void (^SUBlockError)(NSString* errorBlock);

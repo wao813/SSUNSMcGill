@@ -7,14 +7,35 @@
 //
 
 #import "SUAppDelegate.h"
+#import <ECSlidingViewController.h>
+#import <Crashlytics/Crashlytics.h>
 
+#import "SUViewController.h"
+#import "SUMenuView.h"
+
+#import "SUTwitterViewController.h"
+#import "SUMapViewController.h"
+#import "SUCommitteeViewController.h"
+#import "SUScheduleViewController.h"
 @implementation SUAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Crashlytics startWithAPIKey:@"6db80046a0ed213ddfcae907e190a1174b821652"];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    
+    SUMenuView* menuView = [[SUMenuView alloc]init];
+    SUScheduleViewController* schView = [[SUScheduleViewController alloc]init];
+    
+    SUViewController *navController = [[SUViewController alloc] initWithRootViewController:schView andMenuViewController:menuView];
+    
+    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
+    slidingViewController.topViewController = navController;
+    slidingViewController.underLeftViewController = menuView;
+    
+    self.window.rootViewController = slidingViewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
