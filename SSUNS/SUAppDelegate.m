@@ -22,6 +22,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Crashlytics startWithAPIKey:@"6db80046a0ed213ddfcae907e190a1174b821652"];
+ 
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:24 * 1024 * 1024 diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -35,6 +38,8 @@
     slidingViewController.topViewController = navController;
     slidingViewController.underLeftViewController = menuView;
     
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
     self.window.rootViewController = slidingViewController;
     [self.window makeKeyAndVisible];
     return YES;

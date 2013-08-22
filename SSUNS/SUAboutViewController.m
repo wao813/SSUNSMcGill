@@ -7,7 +7,7 @@
 //
 
 #import "SUAboutViewController.h"
-
+#import "SUSpinnerView.h"
 @interface SUAboutViewController ()
 @property (nonatomic,strong)UIWebView* webView;
 @end
@@ -40,9 +40,39 @@
     webView = [[UIWebView alloc] initWithFrame:frame];
     [self.view addSubview:webView];
     
-    NSURL *targetURL = [NSURL URLWithString:@"http://www.ssuns.org/static/files/SSUNS-Brochure.pdf"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
-    [webView loadRequest:request];
+    
+    NSURL *requestUrl = [NSURL URLWithString:@"http://www.ssuns.org/static/files/SSUNS-Brochure.pdf"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60.0];
+    
+    __block NSCachedURLResponse *cachedURLResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
+    
+    NSData *responseData;
+    
+    //check if has cache
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
+    {
+        NSLog(@"findCache for Itinerary");
+        responseData = [cachedURLResponse data];
+
+        [webView loadData:responseData MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
+
+    }
+    else //if no cache get it from the server.
+    {
+        SUSpinnerView* spinnerView = [SUSpinnerView loadSpinnerIntoView:self.view];
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            [spinnerView removeFromSuperview];
+            [webView loadData:data MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
+            
+            //cache received data
+            cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+            //store in cache
+            [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            
+        }];
+    }
+
     
 }
 

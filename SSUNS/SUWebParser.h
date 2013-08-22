@@ -10,16 +10,16 @@
 
 @interface SUWebParser : NSObject
 
-+(void)loadCommitteesListWithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error;
++(void)loadCommitteesListWithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror;
 //categories ,groups
 
-+(void)loadCommittee:(NSString*)committeeString withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error;
++(void)loadCommittee:(NSString*)committeeString withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror;
 //title, content
 
-+(void)loadItinerarywithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error;
++(void)loadItinerarywithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror;
 //days, times
 
-+(void)loadMapWithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error;
++(void)loadMapWithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror;
 //content
 
 
