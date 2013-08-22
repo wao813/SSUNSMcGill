@@ -9,6 +9,7 @@
 #import "SUAppDelegate.h"
 #import <ECSlidingViewController.h>
 #import <Crashlytics/Crashlytics.h>
+#import <Flurry.h>
 
 #import "SUViewController.h"
 #import "SUMenuView.h"
@@ -23,6 +24,9 @@
 {
     [Crashlytics startWithAPIKey:@"6db80046a0ed213ddfcae907e190a1174b821652"];
  
+    [Flurry setVersion:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+    [Flurry startSession:@"2N9SVGY3TZC8N5B7ZQRH"];
+
     NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:24 * 1024 * 1024 diskPath:nil];
     [NSURLCache setSharedURLCache:URLCache];
     
