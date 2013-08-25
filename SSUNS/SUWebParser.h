@@ -16,7 +16,7 @@
 +(void)loadCommittee:(NSString*)committeeString withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror;
 //title, content
 
-+(void)loadItinerarywithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror;
+//+(void)loadItinerarywithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror;
 //days, times
 
 +(void)loadMapWithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror;

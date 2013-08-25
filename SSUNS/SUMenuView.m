@@ -36,7 +36,7 @@
     ////
     
     menuItems = @[ @{@"name": @"", @"content": @[
-                             @{@"name": @"Community", @"viewController": @"twitterWebView"},
+                             @{@"name": @"Twitter", @"viewController": @"twitterWebView"},
                              @{@"name": @"Schedule", @"viewController": @"SUScheduleViewController"},
                              @{@"name": @"Maps", @"viewController": @"SUMapViewController"},
                              @{@"name": @"Committees", @"viewController": @"SUCommitteeViewController"},

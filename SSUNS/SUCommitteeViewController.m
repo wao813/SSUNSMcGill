@@ -120,18 +120,18 @@
 
     cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
     cell.textLabel.numberOfLines = 5;
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:FONT_SIZE];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
     cell.textLabel.text = [dict valueForKey:@"text"];
     
 //    
-//    [self processImageDataWithURLString:[dict objectForKey:@"img"] andBlock:^(NSData *imageData) {
-//        if (self.view.window) {
-//            UIImage* originalImage =[UIImage imageWithData:imageData];
-//            CGFloat scale = 50/[originalImage size].width;
-//            cell.imageView.image =[UIImage imageWithCIImage:originalImage.CIImage scale:scale orientation:originalImage.imageOrientation];
-//        }
-//        
-//    }];
+    [self processImageDataWithURLString:[dict objectForKey:@"img"] andBlock:^(NSData *imageData) {
+        if (self.view.window) {
+            UIImage* originalImage =[UIImage imageWithData:imageData];
+            CGFloat scale = 50/[originalImage size].width;
+            cell.imageView.image =[UIImage imageWithCIImage:originalImage.CIImage scale:scale orientation:originalImage.imageOrientation];
+        }
+        
+    }];
 
     return cell;
 }
