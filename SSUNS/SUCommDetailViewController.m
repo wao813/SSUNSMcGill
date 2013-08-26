@@ -47,8 +47,10 @@
     [SUWebParser loadCommittee:[detailDectionary valueForKey:@"href"] withResponse:^(NSDictionary *responseBlock) {
         [spinner removeFromSuperview];
         //title, content
-        NSString* htmlString = [[NSString alloc]initWithFormat:@"<body><img border='0' src='%@' height='100' style='margin-top:50px;margin-left:auto;margin-right:auto;display:block;' /><div style='margin-top:50px;margin-left:20px;margin-right:20px;'><p style='font-family:Helvetica'>'%@'</p></div></body>",[detailDectionary valueForKey:@"img"],[responseBlock valueForKey:@"content"]];
+        NSString* htmlString = [[NSString alloc]initWithFormat:@"<body><img border='0' src='%@' height='200px' style='margin-top:50px;margin-left:auto;margin-right:auto;display:block;' /><div style='margin-top:50px;margin-left:20px;margin-right:20px;'><p style='font-family:Helvetica;font-size:50px;text-align:justify;'>'%@'</p></div></body>",[detailDectionary valueForKey:@"img"],[responseBlock valueForKey:@"content"]];
         [webView loadHTMLString:htmlString baseURL:nil];
+//        [webView setDelegate:self];
+
 
     } andError:^(NSString *errorBlock) {
         
@@ -98,4 +100,5 @@
             break;
     }
 }
+
 @end

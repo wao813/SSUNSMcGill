@@ -124,14 +124,18 @@
     cell.textLabel.text = [dict valueForKey:@"text"];
     
 //    
-    [self processImageDataWithURLString:[dict objectForKey:@"img"] andBlock:^(NSData *imageData) {
-        if (self.view.window) {
-            UIImage* originalImage =[UIImage imageWithData:imageData];
-            CGFloat scale = 50/[originalImage size].width;
-            cell.imageView.image =[UIImage imageWithCIImage:originalImage.CIImage scale:scale orientation:originalImage.imageOrientation];
-        }
-        
-    }];
+//    [self processImageDataWithURLString:[dict objectForKey:@"img"] andBlock:^(NSData *imageData) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (self.view.window) {
+//                UIImage* originalImage =[UIImage imageWithData:imageData];
+//                CGFloat scale = 50/[originalImage size].width;
+//                cell.imageView.image =[UIImage imageWithCIImage:originalImage.CIImage scale:scale orientation:originalImage.imageOrientation];
+//                
+//            }
+//
+//        });
+//        
+//    }];
 
     return cell;
 }

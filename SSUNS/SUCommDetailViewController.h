@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SUCommDetailViewController : UIViewController
+@interface SUCommDetailViewController : UIViewController<UIWebViewDelegate>
 
 -(id)initWithDictionary:(NSDictionary*)dict;
 
