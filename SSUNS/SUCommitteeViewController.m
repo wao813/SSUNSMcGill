@@ -100,7 +100,7 @@
     // Get a CGSize for the width and, effectively, unlimited height
     CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
     // Get the size of the text given the CGSize we just made as a constraint
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    CGSize size = [text sizeWithFont:[UIFont boldSystemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     // Get the height of our measurement, with a minimum of 44 (standard cell size)
     CGFloat height = size.height<40.0f?44.0f:size.height+ (CELL_CONTENT_MARGIN * 2);
     // return the height, with a bit of extra padding in
@@ -120,7 +120,7 @@
 
     cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
     cell.textLabel.numberOfLines = 5;
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:FONT_SIZE];
     cell.textLabel.text = [dict valueForKey:@"text"];
     
 //    

@@ -97,7 +97,7 @@
     // Configure the cell...
     cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
     cell.textLabel.numberOfLines = 5;
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:FONT_SIZE];
     NSString *details = [[[scheduleDict objectForKey:@"times"] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     NSArray *detailsArray = [details componentsSeparatedByString: @","];
     NSString *time = detailsArray[0];

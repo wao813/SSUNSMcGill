@@ -153,15 +153,18 @@
 - (void)updateActiveViewWithClass:(NSString *)classString {
     id newView;
     if ([classString isEqualToString:@"twitterWebView"]) {
-        newView = [[SUWebViewController alloc] initWithUrl:[NSURL URLWithString:@"https://mobile.twitter.com/search?q=%23ssuns&src=typd"] andTitle:@"#SSUNS"];
-        
+        SUWebViewController *newWebView = [[SUWebViewController alloc] initWithUrl:[NSURL URLWithString:@"https://mobile.twitter.com/search?q=%23ssuns&src=typd"] andTitle:@"#SSUNS"];
+        newWebView.showPageTitleOnTitleBar = NO;
+        newWebView.mode = TSMiniWebBrowserModeNavigation;
+        newView = newWebView;
         
     }else if([classString isEqualToString:@"mapWebView"]){
-        newView = [[SUWebViewController alloc] initWithUrl:[NSURL URLWithString:@"http://www.ssuns.org/hotel-dir"] andTitle:@"Maps"];
-        
+        SUWebViewController *newWebView = [[SUWebViewController alloc] initWithUrl:[NSURL URLWithString:@"http://www.ssuns.org/hotel-dir"] andTitle:@"Maps"];
+        newView = newWebView;
 
     }else if([classString isEqualToString:@"aboutView"]){
-        newView = [[SUWebViewController alloc] initWithUrl:[NSURL URLWithString:@"http://www.ssuns.org/static/files/SSUNS-Brochure.pdf"] andTitle:@"SSUNS"];
+        SUWebViewController *newWebView = [[SUWebViewController alloc] initWithUrl:[NSURL URLWithString:@"http://www.ssuns.org/static/files/SSUNS-Brochure.pdf"] andTitle:@"SSUNS"];
+        newView = newWebView;
         
     }else{
         Class viewControllerClass = NSClassFromString(classString);

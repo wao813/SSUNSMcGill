@@ -3,7 +3,7 @@
 //
 #define CELL_CONTENT_WIDTH 300
 #define CELL_CONTENT_MARGIN 10
-#define FONT_SIZE 18
+#define FONT_SIZE 14
 typedef void (^ActionBlock)();
 
 #ifndef __IPHONE_3_0
