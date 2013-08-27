@@ -43,10 +43,16 @@
     
     SUSpinnerView* spinner = [SUSpinnerView loadSpinnerIntoView:self.view];
     
-    scheduleDict = self.parseItinerarywithData;
-    [spinner removeFromSuperview];
+    [SUWebParser loadItinerarywithResponse:^(NSDictionary *responseBlock) {
+        
+        [spinner removeFromSuperview];
 
-    [self.tableView reloadData];
+        scheduleDict = responseBlock;
+        [self.tableView reloadData];
+    
+    }andError:^(NSString *errorBlock) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,9 +105,34 @@
     cell.textLabel.numberOfLines = 5;
     cell.textLabel.font = [UIFont boldSystemFontOfSize:FONT_SIZE];
     NSString *details = [[[scheduleDict objectForKey:@"times"] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    NSArray *detailsArray = [details componentsSeparatedByString: @","];
-    NSString *time = detailsArray[0];
-    NSString *event = detailsArray[1];
+    //NSArray *detailsArray = [details componentsSeparatedByString: @":"];
+    
+    NSString *time = nil;
+    NSString *event = nil;
+    /*NSError *error = NULL;
+    NSRegularExpression *regex_time = [NSRegularExpression regularExpressionWithPattern:@"[0-9]+\\:[0-9]+.*[0-9]+\\:[0-9]+" options:0 error:&error];
+    //NSArray *matches_time = [regex_time matchesInString:details options:0 range:NSMakeRange(0, [details length])];
+    NSRange matches_time = [regex_time rangeOfFirstMatchInString:details options:0 range:NSMakeRange(0, [details length])];
+    if (!NSEqualRanges(matches_time, NSMakeRange(NSNotFound, 0))) {
+        NSString *time = [details substringWithRange:matches_time];
+    }
+    NSRegularExpression *regex_event = [NSRegularExpression regularExpressionWithPattern:@"[^:]+" options:0 error:&error];
+    //NSArray *matches_event = [regex_event matchesInString:details options:0 range:NSMakeRange(0, [details length])];
+    NSRange matches_event = [regex_event rangeOfFirstMatchInString:details options:0 range:NSMakeRange(0, [details length])];
+    if (!NSEqualRanges(matches_event, NSMakeRange(NSNotFound, 0))) {
+        NSString *event = [details substringWithRange:matches_event];
+    }*/
+    //NSString *time = matches_time[0];
+    //NSString *event = [matches_event lastObject];
+    NSArray *detailArray = [details componentsSeparatedByString: @": "];
+    @try{
+        time = detailArray[0];
+        event = detailArray[1];
+        
+    }
+    @catch (NSException *exception){
+        event = @"Error";
+    }
     cell.textLabel.text = event;
     cell.detailTextLabel.text = time;
     cell.userInteractionEnabled = NO;
@@ -123,6 +154,7 @@
     
      
 }
+/*
 -(NSDictionary *)parseItinerarywithData{
     NSArray *dayArray = [NSArray arrayWithObjects: @"Thursday, November 7, 2013", @"Friday, November 8, 2013", @"Saturday, November 9, 2013",
                          @"Sunday, November 10, 2013", nil];
@@ -158,6 +190,6 @@
     NSDictionary* retDict = [[NSDictionary alloc]initWithObjectsAndKeys:dayArray,@"days",timeArray,@"times", nil];
     return retDict;
 }
-
+*/
 
 @end

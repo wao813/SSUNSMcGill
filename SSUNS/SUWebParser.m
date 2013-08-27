@@ -178,6 +178,94 @@
     
 }
 
++(void)parseItinerarywithData:(NSData*)data withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error{
+    TFHpple *itinParser = [TFHpple hppleWithHTMLData:data];
+    NSString *itinXpathQueryString = @"//div[@id='content']";
+    NSArray *itinNodes = [itinParser searchWithXPathQuery:itinXpathQueryString];
+    
+    if ([itinNodes count]==0) {
+        suresponse(nil);
+    }
+    
+    NSMutableArray* dayArray = [[NSMutableArray alloc] init];
+    NSMutableArray* timeArray = [[NSMutableArray alloc] init];
+    
+    TFHppleElement *rootElement = [itinNodes objectAtIndex:0];
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    
+    for (TFHppleElement *element in [rootElement children]) {
+        if ([[element tagName] isEqualToString:@"div"]) {
+                //new day
+            for (TFHppleElement *celement in [element children]){
+                if ([[celement tagName]isEqualToString:@"b"]) {
+                    for (TFHppleElement* belement in [celement children]) {
+                        if ([[belement tagName]isEqualToString:@"text"]) {
+                            NSString* dstring = [belement content];
+                            NSLog(@"%@",dstring);
+                            [dayArray addObject:dstring];
+                            if ([tempArray count]>0) {
+                                [timeArray addObject:[[NSArray alloc] initWithArray:tempArray]];
+                                [tempArray removeAllObjects];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if([[element tagName]isEqualToString:@"p"]){
+            for (TFHppleElement *pelement in [element children]) {
+                if ([[pelement tagName]isEqualToString:@"text"]) {
+                    NSString* pstring = [[pelement content] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                    NSLog(@"%@",pstring);
+                    [tempArray addObject:pstring];
+                }
+            }
+        }
+        if ([[element tagName]isEqualToString:@"text"]) {
+            NSString* pstring = [[element content] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            if ([pstring length]>0) {
+                NSLog(@"%@",pstring);
+                [tempArray addObject:pstring];
+            }
+        }
+    
+    }
+    [timeArray addObject:[[NSArray alloc] initWithArray:tempArray]];
+    [tempArray removeAllObjects];
+    NSDictionary* retDict = [[NSDictionary alloc]initWithObjectsAndKeys:dayArray,@"days",timeArray,@"times", nil];
+    suresponse(retDict);
+}
+
++(void)loadItinerarywithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror{
+    
+    NSURL *requestUrl = [NSURL URLWithString:[ssunsPre stringByAppendingString:@"/itinerary"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60.0];
+    
+    __block NSCachedURLResponse *cachedURLResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
+    
+    NSData *responseData;
+    
+    //check if has cache
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
+    {
+        NSLog(@"findCache for Itinerary");
+        responseData = [cachedURLResponse data];
+        [SUWebParser parseItinerarywithData:responseData withResponse:suresponse andError:suerror];
+
+    }
+    else //if no cache get it from the server.
+    {
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            [SUWebParser parseItinerarywithData:data withResponse:suresponse andError:suerror];
+            
+            //cache received data
+            cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+            //store in cache
+            [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+        }];
+    }
+}
 
 +(void)parseMapWithData:(NSData*)data withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error{
     TFHpple *commParser = [TFHpple hppleWithHTMLData:data];
