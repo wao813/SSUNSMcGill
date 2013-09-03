@@ -53,11 +53,25 @@
     [SUWebParser loadMapWithResponse:^(NSDictionary *responseBlock) {
         [spinner removeFromSuperview];
         //title, content
-        NSString* htmlString = [[NSString alloc]initWithFormat:@"%@",[responseBlock valueForKey:@"content"]];
-        [webView loadHTMLString:htmlString baseURL:nil];
-
-    } andError:^(NSString *errorBlock) {
+        Boolean installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]];
+        NSString* urlString = nil;
+        if (installed)
+        {
+            urlString = [[NSString alloc]initWithFormat:@"comgooglemaps://?q=%@",[responseBlock valueForKey:@"content"]];
+            NSLog(urlString);
+            NSURL* url=[NSURL URLWithString:urlString];
+            NSURLRequest* request=[NSURLRequest requestWithURL:url];
+            [webView loadRequest:request];
+        }
+        else
+        {
+            urlString = [[NSString alloc]initWithFormat:@"https://maps.google.ca/?q=%@",[responseBlock valueForKey:@"content"]];
+            NSLog(urlString);
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+        }
         
+    } andError:^(NSString *errorBlock) {
+        NSLog(@"error");
     }];
     
 

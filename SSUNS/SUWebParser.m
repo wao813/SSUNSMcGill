@@ -266,7 +266,7 @@
         }];
     }
 }
-
+/*
 +(void)parseMapWithData:(NSData*)data withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error{
     TFHpple *commParser = [TFHpple hppleWithHTMLData:data];
     NSString *commXpathQueryString = @"//div[@id='content']";
@@ -315,5 +315,55 @@
     }
     
 }
+*/
 
++(void)parseMapWithData:(NSData*)data withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error{
+    TFHpple *commParser = [TFHpple hppleWithHTMLData:data];
+    NSString *commXpathQueryString = @"//div[@id='googlemap']";
+    
+    NSArray *commRootNodes = [commParser searchWithXPathQuery:commXpathQueryString];
+    
+    if ([commRootNodes count]==0) {
+        suresponse(nil);
+    }
+    TFHppleElement *rootElement = [commRootNodes objectAtIndex:0];
+    NSString *retString = [rootElement.raw stringByReplacingOccurrencesOfString:@"<div id=\"googlemap\" style=\"display:none\">" withString:[NSString stringWithFormat:@"",ssunsPre]];
+    retString = [retString stringByReplacingOccurrencesOfString:@"</div>" withString:[NSString stringWithFormat:@"",ssunsPre]];
+    NSDictionary* retDict = [[NSDictionary alloc]initWithObjectsAndKeys:retString,@"content", nil];
+    suresponse(retDict);
+    
+}
+
++(void)loadMapWithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror{
+    
+    NSURL *requestUrl = [NSURL URLWithString:[ssunsPre stringByAppendingString:@"/hotel-dir"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60.0];
+    
+    __block NSCachedURLResponse *cachedURLResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
+    
+    NSData *responseData;
+    
+    //check if has cache
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
+    {
+        NSLog(@"findCache for map");
+        responseData = [cachedURLResponse data];
+        [SUWebParser parseMapWithData:responseData withResponse:suresponse andError:suerror];
+        
+    }
+    else //if no cache get it from the server.
+    {
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            [SUWebParser parseMapWithData:data withResponse:suresponse andError:suerror];
+            
+            //cache received data
+            cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+            //store in cache
+            [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            
+        }];
+    }
+    
+}
 @end
