@@ -59,9 +59,7 @@
         {
             urlString = [[NSString alloc]initWithFormat:@"comgooglemaps://?q=%@",[responseBlock valueForKey:@"content"]];
             NSLog(urlString);
-            NSURL* url=[NSURL URLWithString:urlString];
-            NSURLRequest* request=[NSURLRequest requestWithURL:url];
-            [webView loadRequest:request];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
         }
         else
         {
