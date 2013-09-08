@@ -58,13 +58,11 @@
         if (installed)
         {
             urlString = [[NSString alloc]initWithFormat:@"comgooglemaps://?q=%@",[responseBlock valueForKey:@"content"]];
-            NSLog(urlString);
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
         }
         else
         {
             urlString = [[NSString alloc]initWithFormat:@"https://maps.google.ca/?q=%@",[responseBlock valueForKey:@"content"]];
-            NSLog(urlString);
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
         }
         
