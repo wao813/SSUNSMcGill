@@ -18,6 +18,8 @@
 #import "SUMapViewController.h"
 #import "SUCommitteeViewController.h"
 #import "SUScheduleViewController.h"
+#import "SUBGViewController.h"
+
 @implementation SUAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

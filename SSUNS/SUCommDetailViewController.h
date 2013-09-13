@@ -11,6 +11,6 @@
 @interface SUCommDetailViewController : UIViewController<UIWebViewDelegate>
 
 -(id)initWithDictionary:(NSDictionary*)dict;
-
+- (IBAction)pressBG:(id)sender;
 
 @end

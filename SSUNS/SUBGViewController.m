@@ -1,26 +1,28 @@
 //
-//  SUMapViewController.m
+//  SUBGViewController.m
 //  SSUNS
 //
-//  Created by James on 2013-06-25.
+//  Created by Lucille Hua on 2013-09-12.
 //  Copyright (c) 2013 James. All rights reserved.
 //
 
-#import "SUMapViewController.h"
-#import "SUWebParser.h"
+#import "SUBGViewController.h"
 #import "SUSpinnerView.h"
 
-@interface SUMapViewController ()
-@property(nonatomic,strong)UIWebView* webView;
+@interface SUBGViewController ()
+@property (nonatomic,strong)UIWebView *webView;
+@property(nonatomic, strong) NSURL *requestUrl;
 @end
 
-@implementation SUMapViewController
+@implementation SUBGViewController
 @synthesize webView;
+@synthesize requestUrl;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithUrlString:(NSString *)url
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
+        self.requestUrl = [[NSURL alloc]initWithString:url];
         // Custom initialization
     }
     return self;
@@ -31,11 +33,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     // Set left nav bar button to menu icon
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem menuButtonWithAction:^{
-        [(SUViewController *)self.navigationController revealMenu];
-    }];
     
-    self.title = @"Maps";
+    self.title = @"Background Guide";
     
     CGRect webFrame = self.view.frame;
     if (![UIApplication sharedApplication].statusBarHidden) {
@@ -45,34 +44,42 @@
     webView = [[UIWebView alloc] initWithFrame:webFrame];
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     webView.scalesPageToFit = YES;
-
+    
     [self.view addSubview:webView];
     
     
-    SUSpinnerView* spinner = [SUSpinnerView loadSpinnerIntoView:self.view];
-    [SUWebParser loadMapWithResponse:^(NSDictionary *responseBlock) {
-        [spinner removeFromSuperview];
-        //title, content
-        Boolean installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]];
-        NSString* urlString = nil;
-        if (installed)
-        {
-            urlString = [[NSString alloc]initWithFormat:@"comgooglemaps://?q=%@",[responseBlock valueForKey:@"content"]];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-        }
-        else
-        {
-            urlString = [[NSString alloc]initWithFormat:@"https://maps.google.ca/?q=%@",[responseBlock valueForKey:@"content"]];
-            NSLog(urlString);
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-        }
-        [webView loadHTMLString:@"" baseURL:nil];
-        
-    } andError:^(NSString *errorBlock) {
-        NSLog(@"error");
-    }];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.requestUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60.0];
     
-
+    __block NSCachedURLResponse *cachedURLResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
+    
+    NSData *responseData;
+    
+    //check if has cache
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
+    {
+        NSLog(@"findCache for BG");
+        responseData = [cachedURLResponse data];
+        
+        [webView loadData:responseData MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
+        
+    }
+    else //if no cache get it from the server.
+    {
+        SUSpinnerView* spinnerView = [SUSpinnerView loadSpinnerIntoView:self.view];
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            [spinnerView removeFromSuperview];
+            [webView loadData:data MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
+            
+            //cache received data
+            cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+            //store in cache
+            [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            
+        }];
+    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -119,4 +126,6 @@
             break;
     }
 }
+
+
 @end

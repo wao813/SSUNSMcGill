@@ -8,15 +8,20 @@
 
 #import "SUCommDetailViewController.h"
 #import "SUWebParser.h"
+#import "SUWebViewController.h"
 #import "SUSpinnerView.h"
+#import "SUBGViewController.h"
+
 @interface SUCommDetailViewController ()
 @property (nonatomic,strong)NSDictionary* detailDectionary;
 @property (nonatomic,strong)UIWebView* webView;
+@property (nonatomic,strong)NSURL* bgUrl;
 @end
 
 @implementation SUCommDetailViewController
 @synthesize detailDectionary;//href, img, text
 @synthesize webView;
+
 -(id)initWithDictionary:(NSDictionary*)dict{
     self = [super init];
     if (self) {
@@ -28,6 +33,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIBarButtonItem* bgButton = [[UIBarButtonItem alloc] initWithTitle:@"BG" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
+    self.navigationItem.rightBarButtonItem = bgButton;
+
     
     CGRect webFrame = self.view.frame;
     if (![UIApplication sharedApplication].statusBarHidden) {
@@ -47,7 +56,8 @@
     [SUWebParser loadCommittee:[detailDectionary valueForKey:@"href"] withResponse:^(NSDictionary *responseBlock) {
         [spinner removeFromSuperview];
         //title, content
-        NSString* htmlString = [[NSString alloc]initWithFormat:@"<body><img border='0' src='%@' height='200px' style='margin-top:50px;margin-left:auto;margin-right:auto;display:block;' /><div style='margin-top:50px;margin-left:20px;margin-right:20px;'><p style='font-family:Helvetica;font-size:50px;text-align:justify;'>'%@'</p></div></body>",[detailDectionary valueForKey:@"img"],[responseBlock valueForKey:@"content"]];
+        NSString* htmlString = [[NSString alloc]initWithFormat:@"<body><img border='0' src='%@' height='200px' style='margin-top:50px;margin-left:auto;margin-right:auto;display:block;' /><div style='margin-top:50px;margin-left:20px;margin-right:20px;'><p style='font-family:Helvetica;font-size:50px;text-align:justify;'>%@</p></div></body>",[detailDectionary valueForKey:@"img"],[responseBlock valueForKey:@"content"]];
+        //self.bgUrl = [NSURL URLWithString:[responseBlock valueForKey:@"bgUrl"]];
         [webView loadHTMLString:htmlString baseURL:nil];
 //        [webView setDelegate:self];
 
@@ -55,6 +65,13 @@
     } andError:^(NSString *errorBlock) {
         
     }];
+}
+
+- (IBAction)pressBG:(id)sender {
+    SUBGViewController* bgViewController = [[SUBGViewController alloc]initWithUrlString:@"http://www.ssuns.org/static/files/SSUNS-Brochure.pdf"];
+    
+   // SUWebViewController *bgViewController = [[SUWebViewController alloc] initWithUrl:[NSURL URLWithString:@"http://www.ssuns.org/static/files/SSUNS-Brochure.pdf"] andTitle:@"SSUNS"];
+    [self.navigationController pushViewController:bgViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

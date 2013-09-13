@@ -81,14 +81,14 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //NSString* text = [[[scheduleDict objectForKey:@"times"] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSString* text = [[[scheduleDict objectForKey:@"times"] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     // Get a CGSize for the width and, effectively, unlimited height
-    //CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
     // Get the size of the text given the CGSize we just made as a constraint
-    //CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     // Get the height of our measurement, with a minimum of 44 (standard cell size)
-    //CGFloat height = size.height<40.0f?44.0f:size.height+ (CELL_CONTENT_MARGIN * 2);
-    CGFloat height = 50.0f;
+    CGFloat height = size.height<40.0f?44.0f:size.height+ (CELL_CONTENT_MARGIN * 2);
+    //CGFloat height = 50.0f;
     // return the height, with a bit of extra padding in
     return height;
 }
@@ -109,21 +109,7 @@
     
     NSString *time = nil;
     NSString *event = nil;
-    /*NSError *error = NULL;
-    NSRegularExpression *regex_time = [NSRegularExpression regularExpressionWithPattern:@"[0-9]+\\:[0-9]+.*[0-9]+\\:[0-9]+" options:0 error:&error];
-    //NSArray *matches_time = [regex_time matchesInString:details options:0 range:NSMakeRange(0, [details length])];
-    NSRange matches_time = [regex_time rangeOfFirstMatchInString:details options:0 range:NSMakeRange(0, [details length])];
-    if (!NSEqualRanges(matches_time, NSMakeRange(NSNotFound, 0))) {
-        NSString *time = [details substringWithRange:matches_time];
-    }
-    NSRegularExpression *regex_event = [NSRegularExpression regularExpressionWithPattern:@"[^:]+" options:0 error:&error];
-    //NSArray *matches_event = [regex_event matchesInString:details options:0 range:NSMakeRange(0, [details length])];
-    NSRange matches_event = [regex_event rangeOfFirstMatchInString:details options:0 range:NSMakeRange(0, [details length])];
-    if (!NSEqualRanges(matches_event, NSMakeRange(NSNotFound, 0))) {
-        NSString *event = [details substringWithRange:matches_event];
-    }*/
-    //NSString *time = matches_time[0];
-    //NSString *event = [matches_event lastObject];
+
     NSArray *detailArray = [details componentsSeparatedByString: @": "];
     @try{
         time = detailArray[0];

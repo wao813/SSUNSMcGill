@@ -83,7 +83,7 @@
     //check if has cache
     if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
     {
-        NSLog(@"findCache for Itinerary");
+        NSLog(@"findCache for Committee");
         responseData = [cachedURLResponse data];
         [SUWebParser parseCommitteeListWithData:responseData withResponse:suresponse andError:suerror];
         
@@ -132,13 +132,14 @@
     NSMutableString* tmpString = [[NSMutableString alloc]init];
     for(TFHppleElement *descElement in desNodes){
         for (TFHppleElement *pelement in [descElement children]) {
-            if ([[pelement tagName]isEqualToString:@"text"]) {
+           if ([[pelement tagName]isEqualToString:@"text"]) {
                 NSString* pstring = [[pelement content] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                 NSLog(@"%@",pstring);
                 [tmpString appendString:pstring];
             }
         }
     }
+    NSLog(tmpString);
     [retDict setValue:tmpString forKey:@"content"];
     suresponse(retDict);
 
@@ -157,7 +158,7 @@
     //check if has cache
     if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
     {
-        NSLog(@"findCache for Itinerary");
+        NSLog(@"findCache for committee");
         responseData = [cachedURLResponse data];
         [SUWebParser parseCommitteeWithData:responseData withResponse:suresponse andError:suerror];
         

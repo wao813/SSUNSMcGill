@@ -57,7 +57,7 @@
     //check if has cache
     if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
     {
-        NSLog(@"findCache for Itinerary");
+        NSLog(@"findCache for About");
         responseData = [cachedURLResponse data];
 
         [webView loadData:responseData MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];

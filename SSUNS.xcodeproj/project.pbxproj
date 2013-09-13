@@ -42,6 +42,7 @@
 		1AFEB44C177A688900DCF32E /* SUTwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEB44B177A688900DCF32E /* SUTwitterViewController.m */; };
 		1AFEB44F177A69AF00DCF32E /* SUMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEB44E177A69AF00DCF32E /* SUMapViewController.m */; };
 		1AFEB452177A6E5600DCF32E /* SUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEB451177A6E5600DCF32E /* SUViewController.m */; };
+		EB25E56A17E299B2005ADF55 /* SUBGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB25E56917E299B2005ADF55 /* SUBGViewController.m */; };
 		F4D9F03C1628440ABF628A72 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F964162B1937498E8537DDA7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,8 @@
 		1AFEB450177A6E5600DCF32E /* SUViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUViewController.h; sourceTree = "<group>"; };
 		1AFEB451177A6E5600DCF32E /* SUViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUViewController.m; sourceTree = "<group>"; };
 		866273C966924EBC9F4C5433 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		EB25E56817E299B2005ADF55 /* SUBGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBGViewController.h; sourceTree = "<group>"; };
+		EB25E56917E299B2005ADF55 /* SUBGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBGViewController.m; sourceTree = "<group>"; };
 		F964162B1937498E8537DDA7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -180,6 +183,8 @@
 				1A60CFF617C57B6800161EC0 /* images */,
 				1AFEB439177A5F8500DCF32E /* SUAppDelegate.h */,
 				1AFEB43A177A5F8500DCF32E /* SUAppDelegate.m */,
+				EB25E56817E299B2005ADF55 /* SUBGViewController.h */,
+				EB25E56917E299B2005ADF55 /* SUBGViewController.m */,
 				1AFEB431177A5F8500DCF32E /* Supporting Files */,
 				1AFEB44A177A688900DCF32E /* SUTwitterViewController.h */,
 				1AFEB44B177A688900DCF32E /* SUTwitterViewController.m */,
@@ -366,6 +371,7 @@
 				1A60D01417C5C99F00161EC0 /* SUwebview.m in Sources */,
 				1A60D01717C5D3C200161EC0 /* SUSpinnerView.m in Sources */,
 				1A60D01D17C5DE9000161EC0 /* SUAboutViewController.m in Sources */,
+				EB25E56A17E299B2005ADF55 /* SUBGViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
