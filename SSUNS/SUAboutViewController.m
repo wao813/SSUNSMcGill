@@ -37,7 +37,13 @@
     
     CGRect webFrame = self.view.frame;
     if (![UIApplication sharedApplication].statusBarHidden) {
-        webFrame.origin.y -= [UIApplication sharedApplication].statusBarFrame.size.height;
+        CGFloat heightOffset = [UIApplication sharedApplication].statusBarFrame.size.height;
+        CGFloat widthOffset = [UIApplication sharedApplication].statusBarFrame.size.width;
+        if (widthOffset>heightOffset) {
+            webFrame.origin.y -= heightOffset;
+        }else{
+            webFrame.origin.x -= widthOffset;
+        }
     }
     
     webView = [[UIWebView alloc] initWithFrame:webFrame];

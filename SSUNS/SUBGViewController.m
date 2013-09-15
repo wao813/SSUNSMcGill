@@ -33,12 +33,17 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     // Set left nav bar button to menu icon
-    [self loadCommitteeDictionary];
     self.title = @"Background Guide";
     
     CGRect webFrame = self.view.frame;
     if (![UIApplication sharedApplication].statusBarHidden) {
-        webFrame.origin.y -= [UIApplication sharedApplication].statusBarFrame.size.height;
+        CGFloat heightOffset = [UIApplication sharedApplication].statusBarFrame.size.height;
+        CGFloat widthOffset = [UIApplication sharedApplication].statusBarFrame.size.width;
+        if (widthOffset>heightOffset) {
+            webFrame.origin.y -= heightOffset;
+        }else{
+            webFrame.origin.x -= widthOffset;
+        }
     }
     
     webView = [[UIWebView alloc] initWithFrame:webFrame];
@@ -127,146 +132,4 @@
     }
 }
 
--(void)loadCommitteeDictionary{
-    [SUWebParser loadCommitteesListWithResponse:^(NSDictionary *responseBlock) {
-        
-        /* here is what it returns
-         {
-         categories =     (
-         "GAs and ECOSOCs",
-         "Specialised Agencies",
-         Crises
-         );
-         groups =     (
-         (
-         {
-         href = "http://www.ssuns.org/committees/disec";
-         img = "http://www.ssuns.org/static/img/committees/disec.jpg";
-         text = "Disarmament and International Security";
-         },
-         {
-         href = "http://www.ssuns.org/committees/fao";
-         img = "http://www.ssuns.org/static/img/committees/fao.jpg";
-         text = "Food and Agricultural Organization";
-         },
-         {
-         href = "http://www.ssuns.org/committees/wsc";
-         img = "http://www.ssuns.org/static/img/committees/wsc.jpg";
-         text = "World Summit for Children";
-         },
-         {
-         href = "http://www.ssuns.org/committees/au";
-         img = "http://www.ssuns.org/static/img/committees/au.jpg";
-         text = "African Union";
-         },
-         {
-         href = "http://www.ssuns.org/committees/igf";
-         img = "http://www.ssuns.org/static/img/committees/igf.jpg";
-         text = "Internet Governance Forum";
-         },
-         {
-         href = "http://www.ssuns.org/committees/unac";
-         img = "http://www.ssuns.org/static/img/committees/unac.jpg";
-         text = "United Nations Alliance of Civilizations";
-         },
-         {
-         href = "http://www.ssuns.org/committees/csd";
-         img = "http://www.ssuns.org/static/img/committees/csd.jpg";
-         text = "Commission for Social Development";
-         }
-         ),
-         (
-         {
-         href = "http://www.ssuns.org/committees/emirs";
-         img = "http://www.ssuns.org/static/img/committees/emirs.jpg";
-         text = "Meeting of the Emirs";
-         },
-         {
-         href = "http://www.ssuns.org/committees/epha";
-         img = "http://www.ssuns.org/static/img/committees/epha.jpg";
-         text = "European Public\tHealth Alliance";
-         },
-         {
-         href = "http://www.ssuns.org/committees/undef";
-         img = "http://www.ssuns.org/static/img/committees/undef.jpg";
-         text = "UN Democracy Fund";
-         },
-         {
-         href = "http://www.ssuns.org/committees/nfl";
-         img = "http://www.ssuns.org/static/img/committees/nfl.jpg";
-         text = "National Football\tLeague";
-         },
-         {
-         href = "http://www.ssuns.org/committees/oas";
-         img = "http://www.ssuns.org/static/img/committees/oas.jpg";
-         text = "Organization of American States";
-         },
-         {
-         href = "http://www.ssuns.org/committees/automobile";
-         img = "http://www.ssuns.org/static/img/committees/automobile.jpg";
-         text = "Alliance of Automobile Manufacturers \U2013 2008";
-         },
-         {
-         href = "http://www.ssuns.org/committees/tunisian";
-         img = "http://www.ssuns.org/static/img/committees/tunisian.jpg";
-         text = "Bilingual Committee: Tunisian Uprising";
-         },
-         {
-         href = "http://www.ssuns.org/committees/newspaper";
-         img = "http://www.ssuns.org/static/img/committees/newspaper.jpg";
-         text = "Newspaper Revolution 2020";
-         }
-         ),
-         (
-         {
-         href = "http://www.ssuns.org/committees/ad-hoc";
-         img = "http://www.ssuns.org/static/img/committees/ad-hoc.jpg";
-         text = "Ad-Hoc Committee";
-         },
-         {
-         href = "http://www.ssuns.org/committees/unsc";
-         img = "http://www.ssuns.org/static/img/committees/unsc.jpg";
-         text = "United Nations Security Council";
-         },
-         {
-         href = "http://www.ssuns.org/committees/robinh";
-         img = "http://www.ssuns.org/static/img/committees/robinh.jpg";
-         text = "Literary Committee: Robin Hood";
-         },
-         {
-         href = "http://www.ssuns.org/committees/punic";
-         img = "http://www.ssuns.org/static/img/committees/punic.jpg";
-         text = "Punic Wars";
-         },
-         {
-         href = "http://www.ssuns.org/committees/korean";
-         img = "http://www.ssuns.org/static/img/committees/korean.jpg";
-         text = "Joint:\tKorean War";
-         },
-         {
-         href = "http://www.ssuns.org/committees/war";
-         img = "http://www.ssuns.org/static/img/committees/war.jpg";
-         text = "Joint: War of 1812";
-         }
-         )
-         );
-         }
-         */
-        NSMutableDictionary* callBackDict= [[NSMutableDictionary alloc]init];
-        NSArray* groups= [responseBlock objectForKey:@"categories"];
-        NSArray* committees= [responseBlock objectForKey:@"groups"];
-        for(NSDictionary* comm in committees){
-            //do what you want for dictionary here then you can call some after parse function after
-            
-        }
-        [self callbackMethod:callBackDict];
-
-    } andError:^(NSString *errorBlock) {
-        
-    }];
-}
-
--(void)callbackMethod:(NSDictionary*)dict{
-    //start to use the dict.
-}
 @end

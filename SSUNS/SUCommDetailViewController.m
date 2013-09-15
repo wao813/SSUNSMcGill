@@ -33,14 +33,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIBarButtonItem* bgButton = [[UIBarButtonItem alloc] initWithTitle:@"BG" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
-    self.navigationItem.rightBarButtonItem = bgButton;
 
-    
     CGRect webFrame = self.view.frame;
     if (![UIApplication sharedApplication].statusBarHidden) {
-        webFrame.origin.y -= [UIApplication sharedApplication].statusBarFrame.size.height;
+        CGFloat heightOffset = [UIApplication sharedApplication].statusBarFrame.size.height;
+        CGFloat widthOffset = [UIApplication sharedApplication].statusBarFrame.size.width;
+        if (widthOffset>heightOffset) {
+            webFrame.origin.y -= heightOffset;
+        }else{
+            webFrame.origin.x -= widthOffset;
+        }
     }
     
     webView = [[UIWebView alloc] initWithFrame:webFrame];
@@ -57,18 +59,23 @@
         [spinner removeFromSuperview];
         //title, content
         NSString* htmlString = [[NSString alloc]initWithFormat:@"<body><img border='0' src='%@' height='200px' style='margin-top:50px;margin-left:auto;margin-right:auto;display:block;' /><div style='margin-top:50px;margin-left:20px;margin-right:20px;'><p style='font-family:Helvetica;font-size:50px;text-align:justify;'>%@</p></div></body>",[detailDectionary valueForKey:@"img"],[responseBlock valueForKey:@"content"]];
-        //self.bgUrl = [NSURL URLWithString:[responseBlock valueForKey:@"bgUrl"]];
+        self.bgUrl = [NSURL URLWithString:[responseBlock valueForKey:@"bgUrl"]];
         [webView loadHTMLString:htmlString baseURL:nil];
 //        [webView setDelegate:self];
 
-
+        if ([responseBlock objectForKey:@"bgUrl"]) {
+            UIBarButtonItem* bgButton = [[UIBarButtonItem alloc] initWithTitle:@"BG" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
+            self.navigationItem.rightBarButtonItem = bgButton;
+        }
     } andError:^(NSString *errorBlock) {
         
     }];
 }
 
 - (IBAction)pressBG:(id)sender {
-    SUBGViewController* bgViewController = [[SUBGViewController alloc]initWithUrlString:@"http://www.ssuns.org/static/files/SSUNS-Brochure.pdf"];
+    
+//    SUBGViewController* bgViewController = [[SUBGViewController alloc]initWithUrlString:@"http://www.ssuns.org/static/files/SSUNS-Brochure.pdf"];
+    SUBGViewController* bgViewController = [[SUBGViewController alloc]initWithUrlString:self.bgUrl.absoluteString];
     
    // SUWebViewController *bgViewController = [[SUWebViewController alloc] initWithUrl:[NSURL URLWithString:@"http://www.ssuns.org/static/files/SSUNS-Brochure.pdf"] andTitle:@"SSUNS"];
     [self.navigationController pushViewController:bgViewController animated:YES];

@@ -119,7 +119,7 @@
     for (TFHppleElement *pelement in [rootElement children]) {
         if ([[pelement tagName]isEqualToString:@"text"]) {
             NSString* pstring = [[pelement content] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            NSLog(@"%@",pstring);
+//            NSLog(@"%@",pstring);
             [retDict setValue:pstring forKey:@"title"];
         }
     }
@@ -134,13 +134,27 @@
         for (TFHppleElement *pelement in [descElement children]) {
            if ([[pelement tagName]isEqualToString:@"text"]) {
                 NSString* pstring = [[pelement content] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                NSLog(@"%@",pstring);
+//                NSLog(@"%@",pstring);
                 [tmpString appendString:pstring];
             }
         }
     }
-    NSLog(tmpString);
+    
     [retDict setValue:tmpString forKey:@"content"];
+
+    NSString* bgXpathQueryString = @"//div[@id='content']/p/a";
+    NSArray* hrefNodes = [commParser searchWithXPathQuery:bgXpathQueryString];
+    if ([hrefNodes count] == 0) {
+        suresponse(retDict);
+    }
+    NSString* urlString = [[NSString alloc]init];
+    for(TFHppleElement *hrefElement in hrefNodes){
+        urlString = [hrefElement.attributes objectForKey:@"href"];
+        if ([urlString rangeOfString:@"pdf"].location != NSNotFound) {
+            [retDict setValue:[ssunsPre stringByAppendingString:urlString] forKey:@"bgUrl"];
+        }
+    }
+    NSLog(urlString);
     suresponse(retDict);
 
 }
