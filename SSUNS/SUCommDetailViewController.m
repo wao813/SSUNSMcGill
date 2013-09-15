@@ -35,11 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> e831ecfd92f5c162abdd31128bb34561574ffc73
     CGRect webFrame = self.view.frame;
     if (![UIApplication sharedApplication].statusBarHidden) {
         CGFloat heightOffset = [UIApplication sharedApplication].statusBarFrame.size.height;
