@@ -147,14 +147,15 @@
     if ([hrefNodes count] == 0) {
         suresponse(retDict);
     }
-    NSString* urlString = [[NSString alloc]init];
+    NSMutableArray* urlString = [[NSMutableArray alloc] init];
     for(TFHppleElement *hrefElement in hrefNodes){
-        urlString = [hrefElement.attributes objectForKey:@"href"];
-        if ([urlString rangeOfString:@"pdf"].location != NSNotFound) {
-            [retDict setValue:[ssunsPre stringByAppendingString:urlString] forKey:@"bgUrl"];
+        NSString* tempUrl = [hrefElement.attributes objectForKey:@"href"];
+        if ([tempUrl rangeOfString:@"pdf"].location != NSNotFound) {
+             [urlString addObject:[ssunsPre stringByAppendingString:tempUrl]];
         }
     }
-    NSLog(urlString);
+    
+    [retDict setValue:urlString forKey:@"bgUrl"];    
     suresponse(retDict);
 
 }

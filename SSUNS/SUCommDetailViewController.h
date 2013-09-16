@@ -12,5 +12,6 @@
 
 -(id)initWithDictionary:(NSDictionary*)dict;
 - (IBAction)pressBG:(id)sender;
+- (IBAction)pressBG2:(id)sender;
 
 @end
