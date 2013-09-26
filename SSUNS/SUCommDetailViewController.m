@@ -35,6 +35,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
+    [SUWebParser loadCommittee:[detailDectionary valueForKey:@"href"] withResponse:^(NSDictionary *responseBlock) {
+        //bg button first
+        self.bgUrl = [responseBlock valueForKey:@"bgUrl"];
+        if (self.bgUrl.count==1)
+        {
+            UIBarButtonItem* bgButton = [[UIBarButtonItem alloc] initWithTitle:@"BG" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
+            self.navigationItem.rightBarButtonItem = bgButton;
+            
+            NSLog(@"Add bg done");
+        }
+        if (self.bgUrl.count==2)
+        {
+            //some have two bg
+            UIBarButtonItem* bgButton1 = [[UIBarButtonItem alloc] initWithTitle:@"BG1" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
+            UIBarButtonItem* bgButton2 = [[UIBarButtonItem alloc] initWithTitle:@"BG2" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG2:)];
+            NSArray* item_array = [NSArray arrayWithObjects:bgButton2, bgButton1, nil];
+            
+            self.navigationItem.rightBarButtonItems = item_array;
+            
+            NSLog(@"Add bg done");
+            
+        }
+        
+    } andError:^(NSString *errorBlock) {
+        
+    }];
+    
+    // set up views
     CGRect webFrame = self.view.frame;
     if (![UIApplication sharedApplication].statusBarHidden) {
         CGFloat heightOffset = [UIApplication sharedApplication].statusBarFrame.size.height;
@@ -45,45 +74,21 @@
             webFrame.origin.x -= widthOffset;
         }
     }
-    
     webView = [[UIWebView alloc] initWithFrame:webFrame];
     
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     webView.scalesPageToFit = YES;
-
-    
-    //NSArray* item_array = [NSArray arrayWithObjects:bgButton2, bgButton, nil];
-    
-   // self.navigationItem.rightBarButtonItems = item_array;
     
     [self.view addSubview:webView];
     
 	// Do any additional setup after loading the view.
-    self.title = [detailDectionary valueForKey:@"text"];
+    self.title = @"Details";
 
     SUSpinnerView* spinner = [SUSpinnerView loadSpinnerIntoView:self.view];
     [SUWebParser loadCommittee:[detailDectionary valueForKey:@"href"] withResponse:^(NSDictionary *responseBlock) {
         [spinner removeFromSuperview];
-        //bg button first
-        self.bgUrl = [responseBlock valueForKey:@"bgUrl"];
-        if (self.bgUrl.count==1)
-        {
-            UIBarButtonItem* bgButton = [[UIBarButtonItem alloc] initWithTitle:@"BG" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
-            self.navigationItem.rightBarButtonItem = bgButton;
-        }
-        if (self.bgUrl.count==2)
-        {
-            //some have two bg
-            UIBarButtonItem* bgButton1 = [[UIBarButtonItem alloc] initWithTitle:@"BG1" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
-            UIBarButtonItem* bgButton2 = [[UIBarButtonItem alloc] initWithTitle:@"BG2" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG2:)];
-            NSArray* item_array = [NSArray arrayWithObjects:bgButton2, bgButton1, nil];
-            
-            self.navigationItem.rightBarButtonItems = item_array;
-
-        }
-        
         //title, content
-        NSString* htmlString = [[NSString alloc]initWithFormat:@"<body><img border='0' src='%@' height='200px' style='margin-top:50px;margin-left:auto;margin-right:auto;display:block;' /><div style='margin-top:50px;margin-left:20px;margin-right:20px;'><p style='font-family:Helvetica;font-size:50px;text-align:justify;'>%@</p></div></body>",[detailDectionary valueForKey:@"img"],[responseBlock valueForKey:@"content"]];
+        NSString* htmlString = [[NSString alloc]initWithFormat:@"<body><center><h1 style='margin-top:50px;font-family:Helvetica;font-size:50px;'>%@</h1></center><img border='0' src='%@' height='200px' style='margin-top:50px;margin-left:auto;margin-right:auto;display:block;' /><div style='margin-top:50px;margin-left:20px;margin-right:20px;'><p style='font-family:Helvetica;font-size:40px;text-align:justify;'>%@</p></div></body>",[detailDectionary valueForKey:@"text"], [detailDectionary valueForKey:@"img"],[responseBlock valueForKey:@"content"]];
 
         [webView loadHTMLString:htmlString baseURL:nil];
         
