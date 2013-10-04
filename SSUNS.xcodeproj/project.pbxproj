@@ -42,6 +42,7 @@
 		1AFEB44C177A688900DCF32E /* SUTwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEB44B177A688900DCF32E /* SUTwitterViewController.m */; };
 		1AFEB44F177A69AF00DCF32E /* SUMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEB44E177A69AF00DCF32E /* SUMapViewController.m */; };
 		1AFEB452177A6E5600DCF32E /* SUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFEB451177A6E5600DCF32E /* SUViewController.m */; };
+		EB1D99F717FE8CE1008C092D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1D99F617FE8CE1008C092D /* Images.xcassets */; };
 		EB25E56A17E299B2005ADF55 /* SUBGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB25E56917E299B2005ADF55 /* SUBGViewController.m */; };
 		F4D9F03C1628440ABF628A72 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F964162B1937498E8537DDA7 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -104,12 +105,13 @@
 		1AFEB450177A6E5600DCF32E /* SUViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUViewController.h; sourceTree = "<group>"; };
 		1AFEB451177A6E5600DCF32E /* SUViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUViewController.m; sourceTree = "<group>"; };
 		866273C966924EBC9F4C5433 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		EB1D99F317FE8BEF008C092D /* Icon29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon29.png; sourceTree = "<group>"; };
+		EB1D99F417FE8C0D008C092D /* Icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon58.png; sourceTree = "<group>"; };
+		EB1D99F517FE8C17008C092D /* Icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon80.png; sourceTree = "<group>"; };
+		EB1D99F617FE8CE1008C092D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EB25E56817E299B2005ADF55 /* SUBGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBGViewController.h; sourceTree = "<group>"; };
 		EB25E56917E299B2005ADF55 /* SUBGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBGViewController.m; sourceTree = "<group>"; };
 		EB865E5E17FE6ABB00FCC6AC /* Icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon120.png; sourceTree = "<group>"; };
-		EB865E5F17FE6CF900FCC6AC /* Icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon80.png; path = ../../../Downloads/Icon80.png; sourceTree = "<group>"; };
-		EB865E6017FE6D0600FCC6AC /* Icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon58.png; path = ../../../Downloads/Icon58.png; sourceTree = "<group>"; };
-		EB865E6117FE6D1000FCC6AC /* Icon29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon29.png; path = ../../../Downloads/Icon29.png; sourceTree = "<group>"; };
 		F964162B1937498E8537DDA7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -148,9 +150,9 @@
 		1AFEB41E177A5F8500DCF32E = {
 			isa = PBXGroup;
 			children = (
-				EB865E6117FE6D1000FCC6AC /* Icon29.png */,
-				EB865E6017FE6D0600FCC6AC /* Icon58.png */,
-				EB865E5F17FE6CF900FCC6AC /* Icon80.png */,
+				EB1D99F517FE8C17008C092D /* Icon80.png */,
+				EB1D99F417FE8C0D008C092D /* Icon58.png */,
+				EB1D99F317FE8BEF008C092D /* Icon29.png */,
 				EB865E5E17FE6ABB00FCC6AC /* Icon120.png */,
 				1A70BA6917C69A4300BCC3D2 /* Default-568h@2x.png */,
 				1A70BA6717C69A3B00BCC3D2 /* Default@2x.png */,
@@ -222,6 +224,7 @@
 				1A60D01617C5D3C200161EC0 /* SUSpinnerView.m */,
 				1A60D01B17C5DE8E00161EC0 /* SUAboutViewController.h */,
 				1A60D01C17C5DE8F00161EC0 /* SUAboutViewController.m */,
+				EB1D99F617FE8CE1008C092D /* Images.xcassets */,
 			);
 			path = SSUNS;
 			sourceTree = "<group>";
@@ -272,6 +275,11 @@
 				CLASSPREFIX = SU;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = James;
+				TargetAttributes = {
+					1AFEB426177A5F8500DCF32E = {
+						DevelopmentTeam = 56S73A38AH;
+					};
+				};
 			};
 			buildConfigurationList = 1AFEB422177A5F8500DCF32E /* Build configuration list for PBXProject "SSUNS" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -301,6 +309,7 @@
 				1A60CFFD17C57BF500161EC0 /* 18-envelope.png in Resources */,
 				1A60CFFE17C57BF500161EC0 /* 103-map.png in Resources */,
 				1A60D01F17C5E95D00161EC0 /* Icon.png in Resources */,
+				EB1D99F717FE8CE1008C092D /* Images.xcassets in Resources */,
 				1A60D02117C5E96B00161EC0 /* Icon@2x.png in Resources */,
 				1A60D02B17C5EF7100161EC0 /* 83-calendar.png in Resources */,
 				1A60D02D17C5EFED00161EC0 /* 112-group.png in Resources */,
@@ -409,7 +418,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lucille Hua (56S73A38AH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lucille Hua (56S73A38AH)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -424,6 +434,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "AB700F89-982C-46C9-B6EE-141A00504D02";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -440,7 +451,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lucille Hua (56S73A38AH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lucille Hua (56S73A38AH)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -448,6 +460,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "AB700F89-982C-46C9-B6EE-141A00504D02";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -457,8 +470,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 866273C966924EBC9F4C5433 /* Pods.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_X86_VECTOR_INSTRUCTIONS = default;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Lucille Hua (56S73A38AH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Lucille Hua (56S73A38AH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lucille Hua (56S73A38AH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -472,9 +487,10 @@
 				);
 				INFOPLIST_FILE = "SSUNS/SSUNS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "AB700F89-982C-46C9-B6EE-141A00504D02";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB700F89-982C-46C9-B6EE-141A00504D02";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -483,9 +499,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 866273C966924EBC9F4C5433 /* Pods.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_X86_VECTOR_INSTRUCTIONS = default;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lucille Hua (56S73A38AH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lucille Hua (56S73A38AH)";
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -498,9 +516,11 @@
 				);
 				INFOPLIST_FILE = "SSUNS/SSUNS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "AB700F89-982C-46C9-B6EE-141A00504D02";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB700F89-982C-46C9-B6EE-141A00504D02";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

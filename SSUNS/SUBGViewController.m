@@ -44,19 +44,19 @@
     
     self.view = webView;
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.requestUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60.0];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.requestUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:120.0];
     
     __block NSCachedURLResponse *cachedURLResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
     
     NSData *responseData;
     
     //check if has cache
-    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse!=0)
     {
         NSLog(@"findCache for BG");
         responseData = [cachedURLResponse data];
         
-        [webView loadData:responseData MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
+        [webView loadData:responseData MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:NULL];
         
     }
     else //if no cache get it from the server.

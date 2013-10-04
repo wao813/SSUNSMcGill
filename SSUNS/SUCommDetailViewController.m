@@ -17,6 +17,9 @@
 @property (nonatomic,strong)UIWebView* webView;
 @property (nonatomic,strong)UIToolbar* toolbar;
 @property (nonatomic,strong)NSArray* bgUrl;
+@property (nonatomic,strong)UIBarButtonItem* bgButton1;
+@property (nonatomic,strong)UIBarButtonItem* bgButton2;
+@property (nonatomic,strong)NSArray* item_array;
 @end
 
 @implementation SUCommDetailViewController
@@ -41,19 +44,19 @@
         self.bgUrl = [responseBlock valueForKey:@"bgUrl"];
         if (self.bgUrl.count==1)
         {
-            UIBarButtonItem* bgButton = [[UIBarButtonItem alloc] initWithTitle:@"BG" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
-            self.navigationItem.rightBarButtonItem = bgButton;
+            self.bgButton1 = [[UIBarButtonItem alloc] initWithTitle:@"BG" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
+            self.navigationItem.rightBarButtonItem = self.bgButton1;
             
             NSLog(@"Add bg done");
         }
         if (self.bgUrl.count==2)
         {
             //some have two bg
-            UIBarButtonItem* bgButton1 = [[UIBarButtonItem alloc] initWithTitle:@"BG1" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
-            UIBarButtonItem* bgButton2 = [[UIBarButtonItem alloc] initWithTitle:@"BG2" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG2:)];
-            NSArray* item_array = [NSArray arrayWithObjects:bgButton2, bgButton1, nil];
+            self.bgButton1 = [[UIBarButtonItem alloc] initWithTitle:@"BG1" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG:)];
+            self.bgButton2 = [[UIBarButtonItem alloc] initWithTitle:@"BG2" style:UIBarButtonItemStyleBordered target:self action:@selector(pressBG2:)];
+            self.item_array = [NSArray arrayWithObjects:self.bgButton2, self.bgButton1, nil];
             
-            self.navigationItem.rightBarButtonItems = item_array;
+            self.navigationItem.rightBarButtonItems = self.item_array;
             
             NSLog(@"Add bg done");
             

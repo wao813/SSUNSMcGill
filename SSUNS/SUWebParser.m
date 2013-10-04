@@ -81,7 +81,7 @@
     NSData *responseData;
     
     //check if has cache
-    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0)
     {
         NSLog(@"findCache for Committee");
         responseData = [cachedURLResponse data];
@@ -172,7 +172,7 @@
     NSData *responseData;
     
     //check if has cache
-    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0)
     {
         NSLog(@"findCache for committee");
         responseData = [cachedURLResponse data];
@@ -263,7 +263,7 @@
     NSData *responseData;
     
     //check if has cache
-    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0)
     {
         NSLog(@"findCache for Itinerary");
         responseData = [cachedURLResponse data];
@@ -344,8 +344,8 @@
         suresponse(nil);
     }
     TFHppleElement *rootElement = [commRootNodes objectAtIndex:0];
-    NSString *retString = [rootElement.raw stringByReplacingOccurrencesOfString:@"<div id=\"googlemap\" style=\"display:none\">" withString:[NSString stringWithFormat:@"",ssunsPre]];
-    retString = [retString stringByReplacingOccurrencesOfString:@"</div>" withString:[NSString stringWithFormat:@"",ssunsPre]];
+    NSString *retString = [rootElement.raw stringByReplacingOccurrencesOfString:@"<div id=\"googlemap\" style=\"display:none\">" withString:[NSString stringWithFormat:NULL,ssunsPre]];
+    retString = [retString stringByReplacingOccurrencesOfString:@"</div>" withString:[NSString stringWithFormat:NULL,ssunsPre]];
     NSDictionary* retDict = [[NSDictionary alloc]initWithObjectsAndKeys:retString,@"content", nil];
     suresponse(retDict);
     
@@ -361,7 +361,7 @@
     NSData *responseData;
     
     //check if has cache
-    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null])
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0)
     {
         NSLog(@"findCache for map");
         responseData = [cachedURLResponse data];
