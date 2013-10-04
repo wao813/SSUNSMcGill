@@ -69,7 +69,7 @@
         else
         {
             urlString = [[NSString alloc]initWithFormat:@"https://maps.google.ca/?q=%@",[responseBlock valueForKey:@"content"]];
-            NSLog(urlString);
+            //NSLog(urlString);
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
         }
         [webView loadHTMLString:@"" baseURL:nil];

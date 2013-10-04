@@ -106,6 +106,10 @@
 		866273C966924EBC9F4C5433 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		EB25E56817E299B2005ADF55 /* SUBGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBGViewController.h; sourceTree = "<group>"; };
 		EB25E56917E299B2005ADF55 /* SUBGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBGViewController.m; sourceTree = "<group>"; };
+		EB865E5E17FE6ABB00FCC6AC /* Icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon120.png; sourceTree = "<group>"; };
+		EB865E5F17FE6CF900FCC6AC /* Icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon80.png; path = ../../../Downloads/Icon80.png; sourceTree = "<group>"; };
+		EB865E6017FE6D0600FCC6AC /* Icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon58.png; path = ../../../Downloads/Icon58.png; sourceTree = "<group>"; };
+		EB865E6117FE6D1000FCC6AC /* Icon29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon29.png; path = ../../../Downloads/Icon29.png; sourceTree = "<group>"; };
 		F964162B1937498E8537DDA7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -144,6 +148,10 @@
 		1AFEB41E177A5F8500DCF32E = {
 			isa = PBXGroup;
 			children = (
+				EB865E6117FE6D1000FCC6AC /* Icon29.png */,
+				EB865E6017FE6D0600FCC6AC /* Icon58.png */,
+				EB865E5F17FE6CF900FCC6AC /* Icon80.png */,
+				EB865E5E17FE6ABB00FCC6AC /* Icon120.png */,
 				1A70BA6917C69A4300BCC3D2 /* Default-568h@2x.png */,
 				1A70BA6717C69A3B00BCC3D2 /* Default@2x.png */,
 				1A70BA6517C69A3100BCC3D2 /* Default.png */,
@@ -450,8 +458,8 @@
 			baseConfigurationReference = 866273C966924EBC9F4C5433 /* Pods.xcconfig */;
 			buildSettings = {
 				CLANG_X86_VECTOR_INSTRUCTIONS = default;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yuanzheng wen (DTZBV8W2PH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuanzheng wen (DTZBV8W2PH)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lucille Hua (56S73A38AH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lucille Hua (56S73A38AH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -465,8 +473,8 @@
 				INFOPLIST_FILE = "SSUNS/SSUNS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "36290FC4-331B-4D2C-B720-D759E032EB8A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36290FC4-331B-4D2C-B720-D759E032EB8A";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -476,8 +484,8 @@
 			baseConfigurationReference = 866273C966924EBC9F4C5433 /* Pods.xcconfig */;
 			buildSettings = {
 				CLANG_X86_VECTOR_INSTRUCTIONS = default;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yuanzheng wen (DTZBV8W2PH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: James wen (8JAB2USQWX)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lucille Hua (56S73A38AH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lucille Hua (56S73A38AH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -491,8 +499,8 @@
 				INFOPLIST_FILE = "SSUNS/SSUNS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "36290FC4-331B-4D2C-B720-D759E032EB8A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2FFEB85A-E558-49D7-AC01-465F6387A2EE";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

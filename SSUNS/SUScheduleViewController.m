@@ -77,18 +77,28 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[scheduleDict objectForKey:@"times"]objectAtIndex:section]count];
+    int count = 0;
+    NSArray *arr = [[scheduleDict objectForKey:@"times"]objectAtIndex:section];
+    for (NSString *details in arr)
+    {
+        NSArray *detailArray = [details componentsSeparatedByString: @": "];
+        if (detailArray.count>1) count++;
+    }
+    
+    //return [[[scheduleDict objectForKey:@"times"]objectAtIndex:section]count];
+    return count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString* text = [[[scheduleDict objectForKey:@"times"] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     // Get a CGSize for the width and, effectively, unlimited height
-    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 100000.0f);
     // Get the size of the text given the CGSize we just made as a constraint
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     // Get the height of our measurement, with a minimum of 44 (standard cell size)
-    CGFloat height = size.height<40.0f?44.0f:size.height+ (CELL_CONTENT_MARGIN * 2);
-    //CGFloat height = 50.0f;
+    CGFloat height = 60.0f;
+    if (size.height<44.0f) height = 40.0f + (CELL_CONTENT_MARGIN * 1.8);
+    
     // return the height, with a bit of extra padding in
     return height;
 }
@@ -114,10 +124,9 @@
     @try{
         time = detailArray[0];
         event = detailArray[1];
-        
     }
     @catch (NSException *exception){
-        event = @"Error";
+        event = @"None";
     }
     cell.textLabel.text = event;
     cell.detailTextLabel.text = time;
@@ -137,45 +146,5 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-    
-     
 }
-/*
--(NSDictionary *)parseItinerarywithData{
-    NSArray *dayArray = [NSArray arrayWithObjects: @"Thursday, November 7, 2013", @"Friday, November 8, 2013", @"Saturday, November 9, 2013",
-                         @"Sunday, November 10, 2013", nil];
-    NSArray *thursday = [NSArray arrayWithObjects: @"14:00 – 15:30,McGill Tours",
-                         @"16:00 – 17:30,Model United Nations Training Workshop",
-                         @"17:40 – 18:30,SSUNS Walkway",
-                         @"18:30 – 19:45,Opening Ceremonies",
-                         @"19:45 – 21:00,SSUNS Walkway",
-                         @"20:00 – 20:30,Faculty Advisor/Head Delegate Meeting",
-                         @"20:30 – 21:30,Committee Session I (except GAs)", nil];
-    
-    
-    NSArray *friday = [NSArray arrayWithObjects: @"09:00 – 12:15,Committee Session II",
-                       @"12:15 – 14:00,Lunch",
-                       @"13:30 – 14:00,Faculty Advisor/Head Delegate Meeting",
-                       @"14:00 – 17:15,Committee Session III",
-                       @"14:30 – 16:00,Faculty Advisor Crisis (Mezzanine Level)",
-                       @"17:15 – 19:00,Dinner",
-                       @"19:00 – 21:15,Committee Session IV", nil];
-    
-    NSArray *saturday = [NSArray arrayWithObjects: @"09:00 – 12:00,Discover Montreal", @"12:15 – 14:30,Committee Session V",
-                         @"14:30 – 15:00,Break", @"14:30 – 15:00,Faculty Advisor/Head Delegate Meeting",
-                         @"15:15 – 17:30,Committee Session VI",
-                         @"15:30 – 17:00,Curriculum Component Reception",
-                         @"18:00 – 21:15,Free Time",
-                         @"21:30 – 00:00,SSUNS Gala", nil];
-    
-    NSArray *sunday = [NSArray arrayWithObjects: @"09:00 – 11:30,Committee Session VII",
-                       @"11:45 – 13:15,Lunch",
-                       @"13:15 – 14:15,Closing Ceremonies", nil];
-    
-    NSArray* timeArray = [NSArray arrayWithObjects: thursday, friday, saturday, sunday, nil];
-    NSDictionary* retDict = [[NSDictionary alloc]initWithObjectsAndKeys:dayArray,@"days",timeArray,@"times", nil];
-    return retDict;
-}
-*/
-
 @end

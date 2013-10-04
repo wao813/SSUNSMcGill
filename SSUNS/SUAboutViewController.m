@@ -36,21 +36,13 @@
     self.title = @"About";
     
     CGRect webFrame = self.view.frame;
-    if (![UIApplication sharedApplication].statusBarHidden) {
-        CGFloat heightOffset = [UIApplication sharedApplication].statusBarFrame.size.height;
-        CGFloat widthOffset = [UIApplication sharedApplication].statusBarFrame.size.width;
-        if (widthOffset>heightOffset) {
-            webFrame.origin.y -= heightOffset;
-        }else{
-            webFrame.origin.x -= widthOffset;
-        }
-    }
     
     webView = [[UIWebView alloc] initWithFrame:webFrame];
+    self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     webView.scalesPageToFit = YES;
     
-    [self.view addSubview:webView];
+    self.view = webView;
     
     
     NSURL *requestUrl = [NSURL URLWithString:@"http://www.ssuns.org/static/files/SSUNS-Brochure.pdf"];

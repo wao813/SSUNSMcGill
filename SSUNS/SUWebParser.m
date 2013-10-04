@@ -142,7 +142,7 @@
     
     [retDict setValue:tmpString forKey:@"content"];
 
-    NSString* bgXpathQueryString = @"//div[@id='content']/p/a";
+    NSString* bgXpathQueryString = @"//div[@id='content']/a";
     NSArray* hrefNodes = [commParser searchWithXPathQuery:bgXpathQueryString];
     if ([hrefNodes count] == 0) {
         suresponse(retDict);
@@ -151,7 +151,8 @@
     for(TFHppleElement *hrefElement in hrefNodes){
         NSString* tempUrl = [hrefElement.attributes objectForKey:@"href"];
         if ([tempUrl rangeOfString:@"pdf"].location != NSNotFound) {
-             [urlString addObject:[ssunsPre stringByAppendingString:tempUrl]];
+            NSLog(@"bg found");
+            [urlString addObject:[ssunsPre stringByAppendingString:tempUrl]];
         }
     }
     
