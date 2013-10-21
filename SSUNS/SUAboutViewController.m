@@ -55,7 +55,7 @@
     NSData *responseData;
     
     //check if has cache
-    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse!=0)
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse!=0 && cachedURLResponse!=nil)
     {
         NSLog(@"findCache for About");
         responseData = [cachedURLResponse data];
@@ -84,7 +84,6 @@
             else
             {
                 [spinnerView removeFromSuperview];
-                self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
                 [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
             }
         }];

@@ -14,11 +14,13 @@
 @interface SUScheduleViewController ()
 @property(nonatomic,strong)NSDictionary* scheduleDict;
 @property(nonatomic,strong)SUErrorDelegate *errorDel;
+@property(nonatomic,strong)UIAlertView *alert;
 @end
 
 @implementation SUScheduleViewController
 @synthesize scheduleDict;//days, times
 @synthesize errorDel;
+@synthesize alert;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -44,7 +46,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     SUSpinnerView* spinner = [SUSpinnerView loadSpinnerIntoView:self.view];
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Error" message:@"Internet connection timed out!" delegate:errorDel cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    alert = [[UIAlertView alloc]initWithTitle:@"Network Error" message:@"Internet connection timed out!" delegate:errorDel cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     
     [SUWebParser loadItinerarywithResponse:^(NSDictionary *responseBlock) {
         
@@ -59,7 +61,6 @@
         else
         {
             [spinner removeFromSuperview];
-            self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
             [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
 
         }

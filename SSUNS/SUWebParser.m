@@ -100,12 +100,13 @@
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             [SUWebParser parseCommitteeListWithData:data withResponse:suresponse andError:suerror];
-            
-            //cache received data
-            cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+            if (data!=nil)
+            {
+                //cache received data
+                cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
             //store in cache
-            [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
-            
+                [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            }
         }];
     }
     
@@ -188,7 +189,7 @@
     NSData *responseData;
     
     //check if has cache
-    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0)
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0 && cachedURLResponse!=nil)
     {
         NSLog(@"findCache for committee");
         responseData = [cachedURLResponse data];
@@ -203,10 +204,10 @@
             
             if (data!=nil)
             {
-            //cache received data
-           // cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
-            //store in cache
-           // [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+                //cache received data
+                cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+                //store in cache
+                [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
             }
         }];
     }
@@ -288,7 +289,7 @@
     NSData *responseData;
     
     //check if has cache
-    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0)
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0 && cachedURLResponse!=nil)
     {
         NSLog(@"findCache for Itinerary");
         responseData = [cachedURLResponse data];
@@ -300,11 +301,13 @@
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             [SUWebParser parseItinerarywithData:data withResponse:suresponse andError:suerror];
-            
-            //cache received data
-            cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
-            //store in cache
-            [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            if (data!=nil)
+            {
+                //cache received data
+                cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+                //store in cache
+                [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            }
         }];
     }
 }
@@ -371,8 +374,10 @@
         suresponse(nil);
     }
     TFHppleElement *rootElement = [commRootNodes objectAtIndex:0];
-    NSString *retString = [rootElement.raw stringByReplacingOccurrencesOfString:@"<div id=\"googlemap\" style=\"display:none\">" withString:[NSString stringWithFormat:@"",ssunsPre]];
-    retString = [retString stringByReplacingOccurrencesOfString:@"</div>" withString:[NSString stringWithFormat:@"",ssunsPre]];
+
+        NSString *retString = [rootElement.raw stringByReplacingOccurrencesOfString:@"<div id=\"googlemap\" style=\"display:none\">" withString:@""];
+    retString = [retString stringByReplacingOccurrencesOfString:@"</div>" withString:@""];
+        
     NSDictionary* retDict = [[NSDictionary alloc]initWithObjectsAndKeys:retString,@"content", nil];
     suresponse(retDict);
     }
@@ -392,7 +397,7 @@
     NSData *responseData;
     
     //check if has cache
-    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0)
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0 && cachedURLResponse!=nil)
     {
         NSLog(@"findCache for map");
         responseData = [cachedURLResponse data];
@@ -404,12 +409,13 @@
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             [SUWebParser parseMapWithData:data withResponse:suresponse andError:suerror];
-            
-            //cache received data
-            cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
-            //store in cache
-            [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
-            
+            if (data!=nil)
+            {
+                //cache received data
+                cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+                //store in cache
+                [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            }
         }];
     }
     

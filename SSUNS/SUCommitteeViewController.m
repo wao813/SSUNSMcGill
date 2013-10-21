@@ -31,7 +31,7 @@
             processImage(imageData);
         });
     });
-    dispatch_release(downloadQueue);
+//    dispatch_release(downloadQueue);
 }
 
 
