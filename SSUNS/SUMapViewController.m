@@ -5,17 +5,19 @@
 //  Created by James on 2013-06-25.
 //  Copyright (c) 2013 James. All rights reserved.
 //
-
 #import "SUMapViewController.h"
 #import "SUWebParser.h"
 #import "SUSpinnerView.h"
+#import "SUErrorDelegate.h"
 
 @interface SUMapViewController ()
 @property(nonatomic,strong)UIWebView* webView;
+@property(nonatomic,strong)SUErrorDelegate *errorDel;
 @end
 
 @implementation SUMapViewController
 @synthesize webView;
+@synthesize errorDel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,7 +54,7 @@
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     webView.scalesPageToFit = YES;
 
-    [self.view addSubview:webView];
+    self.view = webView;
     
     
     SUSpinnerView* spinner = [SUSpinnerView loadSpinnerIntoView:self.view];
@@ -63,19 +65,34 @@
         NSString* urlString = nil;
         if (installed)
         {
-            urlString = [[NSString alloc]initWithFormat:@"comgooglemaps://?q=%@",[responseBlock valueForKey:@"content"]];
+            if(responseBlock!=nil)
+            {
+                urlString = [[NSString alloc]initWithFormat:@"comgooglemaps://?q=%@",[responseBlock valueForKey:@"content"]];
+            }
+            else
+            {
+                urlString = @"comgooglemaps://?q=H3B+2L7";
+            }
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
         }
         else
         {
-            urlString = [[NSString alloc]initWithFormat:@"https://maps.google.ca/?q=%@",[responseBlock valueForKey:@"content"]];
+            if(responseBlock!=nil)
+            {
+                urlString = [[NSString alloc]initWithFormat:@"https://maps.google.ca/?q=%@",[responseBlock valueForKey:@"content"]];
+            }
+            else
+            {
+                urlString = @"https://maps.google.ca/?q=H3B+2L7";
+            }
             //NSLog(urlString);
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
         }
         [webView loadHTMLString:@"" baseURL:nil];
-        
-    } andError:^(NSString *errorBlock) {
-        NSLog(@"error");
+      
+    } andError:^() {
+        [spinner removeFromSuperview];
+        self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
     }];
     
 

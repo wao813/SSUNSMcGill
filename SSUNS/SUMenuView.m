@@ -36,6 +36,7 @@
     ////
     
     menuItems = @[ @{@"name": @"", @"content": @[
+                             @{@"name": @" ", @"viewController": @"twitterWebView"},
                              @{@"name": @"Twitter", @"viewController": @"twitterWebView"},
                              @{@"name": @"Schedule", @"viewController": @"SUScheduleViewController"},
                              @{@"name": @"Maps", @"viewController": @"SUMapViewController"},
@@ -107,6 +108,10 @@
     NSDictionary* cellConfig = [(NSArray*)[[menuItems objectAtIndex:indexPath.section]objectForKey:@"content"] objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [cellConfig valueForKey:@"name"];
+    if ([cell.textLabel.text isEqualToString: @" "])
+    {
+        cell.userInteractionEnabled = NO;
+    }
     
     return cell;
 }

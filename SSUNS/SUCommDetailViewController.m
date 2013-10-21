@@ -15,17 +15,21 @@
 @interface SUCommDetailViewController ()
 @property (nonatomic,strong)NSDictionary* detailDectionary;
 @property (nonatomic,strong)UIWebView* webView;
+@property (nonatomic,strong)UIWebView* webV;
 @property (nonatomic,strong)UIToolbar* toolbar;
 @property (nonatomic,strong)NSArray* bgUrl;
 @property (nonatomic,strong)UIBarButtonItem* bgButton1;
 @property (nonatomic,strong)UIBarButtonItem* bgButton2;
 @property (nonatomic,strong)NSArray* item_array;
+@property(nonatomic,strong)SUErrorDelegate *errorDel;
 @end
 
 @implementation SUCommDetailViewController
 @synthesize detailDectionary;//href, img, text
 @synthesize webView;
+@synthesize webV;
 @synthesize toolbar;
+@synthesize errorDel;
 
 -(id)initWithDictionary:(NSDictionary*)dict{
     self = [super init];
@@ -39,7 +43,23 @@
 {
     [super viewDidLoad];
    
+    //set up views
+    CGRect webFrame = self.view.frame;
+    
+    webView = [[UIWebView alloc] initWithFrame:webFrame];
+    self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
+    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    webView.scalesPageToFit = YES;
+    
+    self.view = webView;
+    
+    // Do any additional setup after loading the view.
+    self.title = @"Details";
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Error" message:@"Internet connection timed out!" delegate:errorDel cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    
     [SUWebParser loadCommittee:[detailDectionary valueForKey:@"href"] withResponse:^(NSDictionary *responseBlock) {
+        if(responseBlock!=nil)
+        {
         //bg button first
         self.bgUrl = [responseBlock valueForKey:@"bgUrl"];
         if (self.bgUrl.count==1)
@@ -61,38 +81,33 @@
             NSLog(@"Add bg done");
             
         }
+        SUSpinnerView* spinner = [SUSpinnerView loadSpinnerIntoView:self.view];
+        [SUWebParser loadCommittee:[detailDectionary valueForKey:@"href"] withResponse:^(NSDictionary *responseBlock) {
+            if (responseBlock!=nil)
+            {
+                [spinner removeFromSuperview];
+                //title, content
+                NSString* htmlString = [[NSString alloc]initWithFormat:@"<body><center><h1 style='margin-top:50px;font-family:Helvetica;font-size:50px;'>%@</h1></center><img border='0' src='%@' height='200px' style='margin-top:50px;margin-left:auto;margin-right:auto;display:block;' /><div style='margin-top:50px;margin-left:20px;margin-right:20px;'><p style='font-family:Helvetica;font-size:40px;text-align:justify;'>%@</p></div></body>",[detailDectionary valueForKey:@"text"], [detailDectionary valueForKey:@"img"],[responseBlock valueForKey:@"content"]];
+            
+                [webView loadHTMLString:htmlString baseURL:nil];
+            }
         
-    } andError:^(NSString *errorBlock) {
-        NSLog(@"error loading");
-        
-    }];
-    
-    // set up views
-    CGRect webFrame = self.view.frame;
-    
-    webView = [[UIWebView alloc] initWithFrame:webFrame];
-    self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
-    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    webView.scalesPageToFit = YES;
-    
-    self.view = webView;
-    
-	// Do any additional setup after loading the view.
-    self.title = @"Details";
-
-    SUSpinnerView* spinner = [SUSpinnerView loadSpinnerIntoView:self.view];
-    [SUWebParser loadCommittee:[detailDectionary valueForKey:@"href"] withResponse:^(NSDictionary *responseBlock) {
-        [spinner removeFromSuperview];
-        //title, content
-        NSString* htmlString = [[NSString alloc]initWithFormat:@"<body><center><h1 style='margin-top:50px;font-family:Helvetica;font-size:50px;'>%@</h1></center><img border='0' src='%@' height='200px' style='margin-top:50px;margin-left:auto;margin-right:auto;display:block;' /><div style='margin-top:50px;margin-left:20px;margin-right:20px;'><p style='font-family:Helvetica;font-size:40px;text-align:justify;'>%@</p></div></body>",[detailDectionary valueForKey:@"text"], [detailDectionary valueForKey:@"img"],[responseBlock valueForKey:@"content"]];
-
-        [webView loadHTMLString:htmlString baseURL:nil];
-        
-
-        } andError:^(NSString *errorBlock) {
+        } andError:^() {
             NSLog(@"error");
+            [spinner removeFromSuperview];
+             self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+        }];
+
+        }
+    } andError:^(){
+        NSLog(@"error loading");
+        self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
+        [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+        
     }];
-}
+    
+   }
 
 - (IBAction)pressBG:(id)sender{
     SUBGViewController* bgViewController = [[SUBGViewController alloc]initWithUrlString:[self.bgUrl objectAtIndex:0]];

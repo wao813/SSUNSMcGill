@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UIKit/UIAlertView.h>
+#import "SUErrorDelegate.h"
 
 @interface SUCommDetailViewController : UIViewController<UIWebViewDelegate>
 

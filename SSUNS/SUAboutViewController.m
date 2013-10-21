@@ -10,10 +10,12 @@
 #import "SUSpinnerView.h"
 @interface SUAboutViewController ()
 @property (nonatomic,strong)UIWebView* webView;
+@property(nonatomic,strong)SUErrorDelegate *errorDel;
 @end
 
 @implementation SUAboutViewController
 @synthesize webView;
+@synthesize errorDel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,16 +66,27 @@
     else //if no cache get it from the server.
     {
         SUSpinnerView* spinnerView = [SUSpinnerView loadSpinnerIntoView:self.view];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Error" message:@"Internet connection timed out!" delegate:errorDel cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-            [spinnerView removeFromSuperview];
-            [webView loadData:data MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
             
-            //cache received data
-            cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
-            //store in cache
-            [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            if(data!=nil)
+            {
+                [spinnerView removeFromSuperview];
             
+                [webView loadData:data MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
+            
+                //cache received data
+                cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+                //store in cache
+                [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            }
+            else
+            {
+                [spinnerView removeFromSuperview];
+                self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
+                [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+            }
         }];
     }
 

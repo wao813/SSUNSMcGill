@@ -9,13 +9,17 @@
 #import "SUBGViewController.h"
 #import "SUSpinnerView.h"
 #import "SUWebParser.h"
+#import "SUErrorDelegate.h"
+
 @interface SUBGViewController ()
 @property (nonatomic,strong)UIWebView *webView;
 @property(nonatomic, strong) NSURL *requestUrl;
+@property(nonatomic, strong)SUErrorDelegate *errorDel;
 @end
 
 @implementation SUBGViewController
 @synthesize webView;
+@synthesize errorDel;
 @synthesize requestUrl;
 
 - (id)initWithUrlString:(NSString *)url
@@ -56,22 +60,33 @@
         NSLog(@"findCache for BG");
         responseData = [cachedURLResponse data];
         
-        [webView loadData:responseData MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:NULL];
-        
+        if(responseData!=nil)
+            [webView loadData:responseData MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:NULL];
+
     }
     else //if no cache get it from the server.
     {
         SUSpinnerView* spinnerView = [SUSpinnerView loadSpinnerIntoView:self.view];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Error" message:@"Internet connection timed out!" delegate:errorDel cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-            [spinnerView removeFromSuperview];
-            [webView loadData:data MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
+            if(data!=nil)
+            {
+                [spinnerView removeFromSuperview];
+            
+                [webView loadData:data MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
             
             //cache received data
-            cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+                cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
             //store in cache
-            [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
-            
+                [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            }
+            else
+            {
+                NSLog(@"error");
+                [spinnerView removeFromSuperview];
+                [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+            }
         }];
     }
     

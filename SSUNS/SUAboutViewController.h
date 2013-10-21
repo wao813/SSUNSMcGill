@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SUErrorDelegate.h"
 
 @interface SUAboutViewController : UIViewController
 

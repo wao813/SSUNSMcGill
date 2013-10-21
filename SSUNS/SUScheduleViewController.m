@@ -9,13 +9,16 @@
 #import "SUScheduleViewController.h"
 #import "SUWebParser.h"
 #import "SUSpinnerView.h"
+#import "SUErrorDelegate.h"
 
 @interface SUScheduleViewController ()
 @property(nonatomic,strong)NSDictionary* scheduleDict;
+@property(nonatomic,strong)SUErrorDelegate *errorDel;
 @end
 
 @implementation SUScheduleViewController
 @synthesize scheduleDict;//days, times
+@synthesize errorDel;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -40,18 +43,33 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
     SUSpinnerView* spinner = [SUSpinnerView loadSpinnerIntoView:self.view];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Error" message:@"Internet connection timed out!" delegate:errorDel cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     
     [SUWebParser loadItinerarywithResponse:^(NSDictionary *responseBlock) {
         
-        [spinner removeFromSuperview];
-
-        scheduleDict = responseBlock;
-        [self.tableView reloadData];
-    
-    }andError:^(NSString *errorBlock) {
+        if(responseBlock!=nil)
+        {
         
+            [spinner removeFromSuperview];
+
+            scheduleDict = responseBlock;
+            [self.tableView reloadData];
+        }
+        else
+        {
+            [spinner removeFromSuperview];
+            self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+
+        }
+    
+    }andError:^() {
+        NSLog(@"error");
+        [spinner removeFromSuperview];
+        self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
+        [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+
     }];
 }
 

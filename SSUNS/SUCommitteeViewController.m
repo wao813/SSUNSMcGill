@@ -11,10 +11,12 @@
 #import "SUSpinnerView.h"
 @interface SUCommitteeViewController ()
 @property (nonatomic,strong)NSDictionary* communityList;
+@property(nonatomic,strong)SUErrorDelegate *errorDel;
 @end
 
 @implementation SUCommitteeViewController
 @synthesize communityList;//categories ,groups
+@synthesize errorDel;
 
 -(void)processImageDataWithURLString:(NSString *)urlString andBlock:(void (^)(NSData *imageData))processImage
 {
@@ -58,14 +60,26 @@
     [super viewDidAppear:animated];
     
     SUSpinnerView* spinner = [SUSpinnerView loadSpinnerIntoView:self.view];
-
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Error" message:@"Internet connection timed out!" delegate:errorDel cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [SUWebParser loadCommitteesListWithResponse:^(NSDictionary *responseBlock) {
-        [spinner removeFromSuperview];
+        if(responseBlock!=nil)
+        {
+            [spinner removeFromSuperview];
 
-        communityList = responseBlock;
-        [self.tableView reloadData];
-    } andError:^(NSString *errorBlock) {
-        
+            communityList = responseBlock;
+            [self.tableView reloadData];
+        }
+        else
+        {
+            [spinner removeFromSuperview];
+            self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+        }
+    } andError:^() {
+        NSLog(@"Error");
+        [spinner removeFromSuperview];
+        self.view.backgroundColor = [[UIColor alloc] initWithWhite:1.0f alpha:1.0f];
+        [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
     }];
 }
 - (void)didReceiveMemoryWarning

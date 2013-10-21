@@ -13,6 +13,8 @@
 @implementation SUWebParser
 
 +(void)parseCommitteeListWithData:(NSData*)data withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error{
+    if(data!=nil)
+    {
     TFHpple *commParser = [TFHpple hppleWithHTMLData:data];
     NSString *commXpathQueryString = @"//div[@id='content']";
     NSArray *commRootNodes = [commParser searchWithXPathQuery:commXpathQueryString];
@@ -68,6 +70,11 @@
     }
     NSDictionary* retDict = [[NSDictionary alloc]initWithObjectsAndKeys:categoryArray,@"categories",groupArray,@"groups", nil];
     suresponse(retDict);
+    }
+    else
+    {
+        suresponse(nil);
+    }
 }
 
 +(void)loadCommitteesListWithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror{
@@ -81,7 +88,7 @@
     NSData *responseData;
     
     //check if has cache
-    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0)
+    if(cachedURLResponse && cachedURLResponse != (id)[NSNull null] && cachedURLResponse != 0 && cachedURLResponse != nil)
     {
         NSLog(@"findCache for Committee");
         responseData = [cachedURLResponse data];
@@ -105,6 +112,10 @@
 }
 
 +(void)parseCommitteeWithData:(NSData*)data withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error{
+    
+    if (data!=nil)
+    {
+       
     TFHpple *commParser = [TFHpple hppleWithHTMLData:data];
     
     NSString *commXpathQueryString = @"//div[@id='content']/h1";
@@ -158,6 +169,11 @@
     
     [retDict setValue:urlString forKey:@"bgUrl"];    
     suresponse(retDict);
+    }
+    else
+    {
+        suresponse(nil);
+    }
 
 }
 
@@ -185,17 +201,21 @@
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             [SUWebParser parseCommitteeWithData:data withResponse:suresponse andError:suerror];
             
+            if (data!=nil)
+            {
             //cache received data
-            cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
+           // cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data userInfo:nil storagePolicy:NSURLCacheStorageAllowed];
             //store in cache
-            [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
-            
+           // [[NSURLCache sharedURLCache] storeCachedResponse:cachedURLResponse forRequest:request];
+            }
         }];
     }
     
 }
 
 +(void)parseItinerarywithData:(NSData*)data withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error{
+    if(data!=nil)
+    {
     TFHpple *itinParser = [TFHpple hppleWithHTMLData:data];
     NSString *itinXpathQueryString = @"//div[@id='content']";
     NSArray *itinNodes = [itinParser searchWithXPathQuery:itinXpathQueryString];
@@ -251,6 +271,11 @@
     [tempArray removeAllObjects];
     NSDictionary* retDict = [[NSDictionary alloc]initWithObjectsAndKeys:dayArray,@"days",timeArray,@"times", nil];
     suresponse(retDict);
+    }
+    else
+    {
+        suresponse(nil);
+    }
 }
 
 +(void)loadItinerarywithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror{
@@ -336,6 +361,8 @@
 
 +(void)parseMapWithData:(NSData*)data withResponse:(SUBlockResponse)suresponse andError:(SUBlockError)error{
     TFHpple *commParser = [TFHpple hppleWithHTMLData:data];
+    if(data!=nil)
+    {
     NSString *commXpathQueryString = @"//div[@id='googlemap']";
     
     NSArray *commRootNodes = [commParser searchWithXPathQuery:commXpathQueryString];
@@ -344,11 +371,15 @@
         suresponse(nil);
     }
     TFHppleElement *rootElement = [commRootNodes objectAtIndex:0];
-    NSString *retString = [rootElement.raw stringByReplacingOccurrencesOfString:@"<div id=\"googlemap\" style=\"display:none\">" withString:[NSString stringWithFormat:NULL,ssunsPre]];
-    retString = [retString stringByReplacingOccurrencesOfString:@"</div>" withString:[NSString stringWithFormat:NULL,ssunsPre]];
+    NSString *retString = [rootElement.raw stringByReplacingOccurrencesOfString:@"<div id=\"googlemap\" style=\"display:none\">" withString:[NSString stringWithFormat:@"",ssunsPre]];
+    retString = [retString stringByReplacingOccurrencesOfString:@"</div>" withString:[NSString stringWithFormat:@"",ssunsPre]];
     NSDictionary* retDict = [[NSDictionary alloc]initWithObjectsAndKeys:retString,@"content", nil];
     suresponse(retDict);
-    
+    }
+    else
+    {
+        suresponse(nil);
+    }
 }
 
 +(void)loadMapWithResponse:(SUBlockResponse)suresponse andError:(SUBlockError)suerror{
